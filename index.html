@@ -1,84 +1,88 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="my">
 <head>
     <meta charset="UTF-8">
-    <title>缅甸本地支付 - 黑金版</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Myanmar Gold VIP</title>
     <style>
-        /* 核心黑金配色 */
-        body {
-            background-color: #0d0d0d; /* 深黑背景 */
-            color: #d4af37;           /* 黄金色文字 */
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            padding-top: 50px;
+        :root { --gold: #d4af37; --gold-light: #f9edbe; --tg-blue: #24A1DE; }
+        body { 
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%); 
+            color: #fff; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; 
+        }
+        
+        /* 流光边框卡片 */
+        .card { 
+            position: relative; background: rgba(25, 25, 25, 0.9); width: 85%; max-width: 380px; 
+            padding: 40px 25px; border-radius: 24px; text-align: center; overflow: hidden;
+            backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .card::before {
+            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: conic-gradient(transparent, transparent, transparent, var(--gold));
+            animation: rotate 4s linear infinite; z-index: -1;
+        }
+        @keyframes rotate { 100% { transform: rotate(360deg); } }
+        .card-inner { background: #121212; border-radius: 22px; padding: 30px 20px; }
+
+        .logo-area { position: relative; width: 90px; height: 90px; margin: 0 auto 20px; }
+        .logo { 
+            width: 100%; height: 100%; background: linear-gradient(135deg, var(--gold), #8a6d3b); 
+            border-radius: 25px; display: flex; justify-content: center; align-items: center; 
+            font-size: 45px; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+        .verified-badge { 
+            position: absolute; bottom: -5px; right: -5px; background: #00c853; 
+            color: white; font-size: 10px; padding: 4px 8px; border-radius: 10px; border: 2px solid #121212;
         }
 
-        .payment-container {
-            text-align: center;
-            background: linear-gradient(145deg, #1a1a1a, #000000);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid #333;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
+        h1 { font-size: 24px; color: var(--gold); margin: 10px 0 5px; letter-spacing: 1px; }
+        .status { font-size: 12px; color: #00c853; display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 25px; }
+        .dot { width: 8px; height: 8px; background: #00c853; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        .icon-group {
-            display: flex;
-            gap: 25px;
-            justify-content: center;
-            margin-top: 20px;
-        }
+        .pay-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px; }
+        .pay-box { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 13px; }
+        .pay-box strong { color: var(--gold-light); display: block; margin-top: 4px; }
 
-        /* 图标样式：精致App圆角+阴影 */
-        .pay-link {
-            transition: transform 0.2s ease;
-            text-decoration: none;
+        .btn-tg { 
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: linear-gradient(90deg, #24A1DE, #1c82b6); color: white; 
+            text-decoration: none; padding: 20px; border-radius: 18px; font-weight: bold; 
+            font-size: 18px; transition: 0.3s; box-shadow: 0 8px 25px rgba(36, 161, 222, 0.3);
         }
+        .btn-tg:active { transform: scale(0.95); }
 
-        .pay-link:hover {
-            transform: scale(1.1); /* 鼠标悬停放大效果 */
-        }
-
-        .pay-icon {
-            width: 80px;            /* 建议图标尺寸 */
-            height: 80px;
-            border-radius: 15px;    /* 圆角 */
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); /* 金色微光阴影 */
-            object-fit: cover;
-            border: 1px solid #444;
-        }
-
-        .label {
-            display: block;
-            margin-top: 8px;
-            font-size: 14px;
-            color: #888;
-        }
+        .notice { margin-top: 25px; font-size: 11px; color: #666; line-height: 1.6; }
     </style>
 </head>
 <body>
+    <div class="card">
+        <div class="card-inner">
+            <div class="logo-area">
+                <div class="logo">👑</div>
+                <div class="verified-badge">Verified</div>
+            </div>
+            
+            <h1>VIP Gold Service</h1>
+            <div class="status"><span class="dot"></span> Online ဝန်ဆောင်မှုရှိနေပါသည်</div>
 
-    <div class="payment-container">
-        <h3>缅甸本地快捷支付</h3>
-        <p style="color: #aaa;">请选择支付方式进行跳转</p>
+            <div class="pay-grid">
+                <div class="pay-box">ငွေသွင်း/ငွေထုတ် <strong>Kpay</strong></div>
+                <div class="pay-box">ငွေသွင်း/ငွေထုတ် <strong>WavePay</strong></div>
+            </div>
 
-        <div class="icon-group">
-            <!-- KBZ Pay 入口 -->
-            <a href="https://kbzpay.com" target="_blank" class="pay-link">
-                <!-- 请确保文件名与你上传的完全一致 -->
-                <img src="kpay.png" alt="Kpay" class="pay-icon">
-                <span class="label">Kpay</span>
+            <!-- ⚠️ 替换下方的链接 -->
+            <a href="https://你的BeMob链接" class="btn-tg">
+                Telegram တွင် ဆက်သွယ်ပါ
             </a>
 
-            <!-- Wave Money 入口 -->
-            <a href="https://wavemoney.com.mm" target="_blank" class="pay-link">
-                <!-- 请确保文件名与你上传的完全一致 -->
-                <img src="wave.png" alt="WavePay" class="pay-icon">
-                <span class="label">WavePay</span>
-            </a>
+            <div class="notice">
+                မြန်မာနိုင်ငံ၏ စိတ်ချရဆုံးနှင့် အမြန်ဆန်ဆုံး ဝန်ဆောင်မှု<br>
+                (၂၄) နာရီ စိတ်ကြိုက်မေးမြန်းနိုင်ပါသည်
+            </div>
         </div>
     </div>
-
 </body>
 </html>
