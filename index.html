@@ -2,131 +2,83 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Special Offer - 100% Bonus</title>
-    <!-- 引入 Font Awesome 矢量图标 -->
-    <link rel="stylesheet" href="https://cloudflare.com">
-    
+    <title>缅甸本地支付 - 黑金版</title>
     <style>
-        :root {
-            --gold: #d4af37;
-            --black: #0d0d0d;
-        }
-
+        /* 核心黑金配色 */
         body {
-            background-color: var(--black);
-            color: #fff;
-            font-family: 'PingFang SC', sans-serif;
+            background-color: #0d0d0d; /* 深黑背景 */
+            color: #d4af37;           /* 黄金色文字 */
+            font-family: sans-serif;
             display: flex;
             justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            overflow: hidden;
+            padding-top: 50px;
         }
 
-        .card {
-            background: linear-gradient(145deg, #1a1a1a, #050505);
-            padding: 40px 20px;
-            border-radius: 24px;
-            border: 1px solid #333;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        .payment-container {
             text-align: center;
-            max-width: 360px;
-            width: 90%;
-            position: relative;
-        }
-
-        /* 1. 动态优惠文案与呼吸灯动画 */
-        .bonus-badge {
-            color: var(--gold);
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 15px;
-            display: block;
-            /* 呼吸灯缩放动画 */
-            animation: breathe 2s infinite ease-in-out;
-        }
-
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); opacity: 0.8; }
-            50% { transform: scale(1.15); opacity: 1; text-shadow: 0 0 15px var(--gold); }
-        }
-
-        .local-icon {
-            width: 90px;
-            height: 90px;
+            background: linear-gradient(145deg, #1a1a1a, #000000);
+            padding: 30px;
             border-radius: 20px;
-            margin-bottom: 20px;
-            border: 2px solid var(--gold);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        h2 { color: #fff; margin: 0; font-size: 1.4rem; }
-        
-        /* 立即下载按钮 */
-        .btn-main {
-            display: inline-flex;
-            align-items: center;
-            background: linear-gradient(to bottom, var(--gold), #aa8a2e);
-            color: #000;
-            padding: 14px 40px;
-            border-radius: 30px;
+        .icon-group {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        /* 图标样式：精致App圆角+阴影 */
+        .pay-link {
+            transition: transform 0.2s ease;
             text-decoration: none;
-            font-weight: bold;
-            margin-top: 25px;
-            transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(212,175,55,0.4);
         }
 
-        /* 3. 跳转提示语 */
-        .redirect-tip {
-            margin-top: 15px;
-            font-size: 12px;
-            color: #555;
+        .pay-link:hover {
+            transform: scale(1.1); /* 鼠标悬停放大效果 */
+        }
+
+        .pay-icon {
+            width: 80px;            /* 建议图标尺寸 */
+            height: 80px;
+            border-radius: 15px;    /* 圆角 */
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2); /* 金色微光阴影 */
+            object-fit: cover;
+            border: 1px solid #444;
+        }
+
+        .label {
             display: block;
-        }
-
-        .redirect-tip i {
-            animation: rotate 2s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            margin-top: 8px;
+            font-size: 14px;
+            color: #888;
         }
     </style>
 </head>
 <body>
 
-    <div class="card">
-        <!-- 缅语：100% Bonus (已配呼吸灯动画) -->
-        <span class="bonus-badge">၁၀၀% ဘောနပ်စ် (Bonus)</span>
+    <div class="payment-container">
+        <h3>缅甸本地快捷支付</h3>
+        <p style="color: #aaa;">请选择支付方式进行跳转</p>
 
-        <!-- 引用本地图标 -->
-        <img src="kpay.png" alt="Logo" class="local-icon">
+        <div class="icon-group">
+            <!-- KBZ Pay 入口 -->
+            <a href="https://kbzpay.com" target="_blank" class="pay-link">
+                <!-- 请确保文件名与你上传的完全一致 -->
+                <img src="kpay.png" alt="Kpay" class="pay-icon">
+                <span class="label">Kpay</span>
+            </a>
 
-        <h2>项目已就绪</h2>
-        <p style="color: #888; font-size: 14px;">点击下方按钮立即领取优惠并进入下载</p>
-
-        <!-- 按钮跳转链接 -->
-        <a href="https://你的BeMob链接" class="btn-main">
-            <i class="fas fa-download"></i> 立即下载
-        </a>
-
-        <!-- 自动跳转提示 -->
-        <span class="redirect-tip">
-            <i class="fas fa-spinner"></i> 正在自动跳转至安全链接...
-        </span>
+            <!-- Wave Money 入口 -->
+            <a href="https://wavemoney.com.mm" target="_blank" class="pay-link">
+                <!-- 请确保文件名与你上传的完全一致 -->
+                <img src="wave.png" alt="WavePay" class="pay-icon">
+                <span class="label">WavePay</span>
+            </a>
+        </div>
     </div>
-
-    <!-- 2. 3秒强制跳转脚本 -->
-    <script>
-        setTimeout(function() {
-            // 请将此处换成你真实的 BeMob 链接
-            window.location.href = "https://你的BeMob链接";
-        }, 3000); // 3000毫秒 = 3秒
-    </script>
 
 </body>
 </html>
