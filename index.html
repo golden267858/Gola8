@@ -3,160 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Myanmar Gold 8 VIP</title>
+    <title>Myanmar Gold VIP</title>
     <style>
         :root { 
-            --gold-light: #fff3a6;
-            --gold-mid: #d4af37;
-            --gold-dark: #8a6d3b;
-            --gold-shadow: #5c441a;
+            --gold: #d4af37; 
+            --gold-light: #f9edbe; 
+            --gold-bright: #fff9e6;
+            --tg-blue: #24A1DE; 
         }
         
         body { 
-            background: #000;
-            color: #fff; 
-            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%); 
+            color: #fff; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             display: flex; justify-content: center; align-items: center; 
-            min-height: 100vh; margin: 0;
-            overflow: hidden;
+            min-height: 100vh; margin: 0; overflow: hidden;
         }
 
+        /* 3D 金币画布 */
         .foreground-coins {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 999;
-            perspective: 1200px;
+            pointer-events: none; z-index: 999; perspective: 1000px;
         }
 
-        /* 3D 实体金币 */
+        /* 小尺寸 3D 金币 */
         .coin {
-            position: absolute;
-            top: -120px;
-            width: 52px; height: 52px;
-            transform-style: preserve-3d;
-            animation: fall-slow linear forwards;
+            position: absolute; top: -60px; width: 36px; height: 36px;
+            transform-style: preserve-3d; animation: fall-slow linear forwards;
         }
-
         .coin-inner {
-            position: relative;
-            width: 100%; height: 100%;
-            transform-style: preserve-3d;
-            animation: rotate3d 3s linear infinite;
+            position: relative; width: 100%; height: 100%;
+            transform-style: preserve-3d; animation: rotate3d 3.5s linear infinite;
         }
-
         .face {
-            position: absolute;
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            background: conic-gradient(from 0deg, var(--gold-dark) 0%, var(--gold-light) 25%, var(--gold-mid) 50%, var(--gold-light) 75%, var(--gold-dark) 100%);
-            border: 2px solid var(--gold-shadow);
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: inset 0 0 12px rgba(0,0,0,0.3);
+            position: absolute; width: 100%; height: 100%; border-radius: 50%;
+            background: conic-gradient(from 0deg, var(--gold) 0%, var(--gold-bright) 25%, var(--gold-light) 50%, var(--gold-bright) 75%, var(--gold) 100%);
+            border: 1px solid var(--gold-light); display: flex; align-items: center; justify-content: center;
+            box-shadow: inset 0 0 5px rgba(255,255,255,0.5);
         }
-
-        /* MMK 字体加大加粗 */
+        /* MMK 字体极大化 */
         .face::after {
-            content: "MMK";
-            font-size: 14px; /* 增大 */
-            font-weight: 900; /* 加粗 */
-            color: #4a3612;
-            text-shadow: 1px 1px 0px rgba(255,255,255,0.3);
+            content: "MMK"; font-size: 13px; font-weight: 900; color: #7d5e00;
+            text-shadow: 0.5px 0.5px 0px rgba(255,255,255,0.5);
         }
-
-        /* 物理双面：前后拉开距离 */
-        .front { transform: translateZ(3px); }
-        .back  { transform: translateZ(-3px) rotateY(180deg); }
-
-        /* 侧边 */
-        .side {
-            position: absolute;
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            background: var(--gold-dark);
-            transform: translateZ(0);
-            border: 1px solid var(--gold-shadow);
-        }
+        .front { transform: translateZ(2px); }
+        .back  { transform: translateZ(-2px) rotateY(180deg); }
+        .side { position: absolute; width: 100%; height: 100%; border-radius: 50%; background: var(--gold); transform: translateZ(0); }
 
         @keyframes rotate3d {
-            0% { transform: rotateY(0deg) rotateX(20deg); }
-            100% { transform: rotateY(360deg) rotateX(20deg); }
+            0% { transform: rotateY(0deg) rotateX(15deg); }
+            100% { transform: rotateY(360deg) rotateX(15deg); }
         }
-
-        /* 缓慢下落 */
         @keyframes fall-slow {
-            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            0% { transform: translateY(0); opacity: 0; }
             10% { opacity: 1; }
-            100% { transform: translateY(115vh) rotate(45deg); opacity: 1; }
+            100% { transform: translateY(110vh); opacity: 1; }
         }
 
-        /* 核心卡片容器 */
-        .card { position: relative; width: 92%; max-width: 380px; z-index: 10; }
-        .card-inner { 
-            position: relative; background: rgba(15, 15, 15, 0.88); 
-            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
-            border-radius: 40px; padding: 45px 20px; border: 1px solid rgba(212, 175, 55, 0.35);
-            text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+        /* 初始代码中的旋转发光卡片结构 */
+        .card { 
+            position: relative; background: rgba(25, 25, 25, 0.9); width: 85%; max-width: 380px; 
+            padding: 4px; border-radius: 28px; text-align: center; overflow: hidden;
+            backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.2); z-index: 10;
+        }
+        .card::before {
+            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: conic-gradient(transparent, transparent, transparent, var(--gold));
+            animation: rotate-border 4s linear infinite; z-index: -1;
+        }
+        @keyframes rotate-border { 100% { transform: rotate(360deg); } }
+        .card-inner { background: #121212; border-radius: 24px; padding: 35px 20px; }
+
+        /* 初始 Logo 区域结构 */
+        .logo-area { position: relative; width: 100px; height: 100px; margin: 0 auto 20px; }
+        .logo { 
+            width: 100%; height: 100%; border-radius: 25px; overflow: hidden;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); border: 2.5px solid var(--gold);
+        }
+        .logo img { width: 100%; height: 100%; object-fit: cover; }
+        .verified-badge { 
+            position: absolute; bottom: -5px; right: -5px; background: #00c853; 
+            color: white; font-size: 10px; padding: 4px 8px; border-radius: 10px; border: 2px solid #121212;
         }
 
-        /* Logo 区域修复：即便图丢了也会有金色底色 */
-        .logo-area { 
-            width: 90px; height: 90px; margin: 0 auto 15px; 
-            border: 2.5px solid var(--gold-mid); border-radius: 25px; 
-            overflow: hidden; position: relative;
-            background: linear-gradient(45deg, var(--gold-dark), var(--gold-light));
-            box-shadow: 0 5px 15px rgba(212,175,55,0.3);
-        }
-        .logo-area img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-        h1 { font-size: 24px; color: var(--gold-mid); margin: 12px 0; font-weight: 800; letter-spacing: 0.5px; }
-        
-        .status { font-size: 14px; color: #44eb87; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 35px; }
-        .dot { width: 10px; height: 10px; background: #00c853; border-radius: 50%; box-shadow: 0 0 10px #00c853; animation: blink 1.5s infinite; }
+        h1 { font-size: 24px; color: var(--gold); margin: 10px 0 5px; letter-spacing: 1px; }
+        .status { font-size: 12px; color: #00c853; display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 25px; }
+        .dot { width: 8px; height: 8px; background: #00c853; border-radius: 50%; animation: blink 1.2s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* 巨型支付 Logo (80px) */
-        .pay-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; }
-        .pay-box { flex: 1; background: rgba(255,255,255,0.06); padding: 25px 10px; border-radius: 30px; border: 1px solid rgba(212, 175, 55, 0.2); }
-        .pay-icon { width: 80px; height: 80px; margin-bottom: 15px; border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); }
-        .pay-box strong { color: #fff; font-size: 14px; }
+        /* 并列巨型支付布局 */
+        .pay-row { display: flex; justify-content: center; gap: 12px; margin-bottom: 30px; }
+        .pay-box { 
+            flex: 1; display: flex; flex-direction: column; align-items: center; 
+            background: rgba(255,255,255,0.05); padding: 15px 5px; border-radius: 20px; 
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .pay-icon { width: 80px; height: 80px; border-radius: 15px; margin-bottom: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .pay-info strong { color: #fff; font-size: 14px; }
+        .pay-info span { font-size: 10px; color: #888; display: block; margin-bottom: 2px; }
 
-        .btn-group { display: flex; flex-direction: column; gap: 15px; }
-        .btn { text-decoration: none; padding: 20px; border-radius: 22px; font-weight: bold; font-size: 17px; color: white; transition: 0.3s; text-align: center; }
-        .btn-tg { background: linear-gradient(135deg, #24A1DE, #1c82b6); }
-        .btn-viber { background: linear-gradient(135deg, #7360f2, #5d4ed1); }
-        .btn:active { transform: scale(0.96); }
-        .notice { margin-top: 30px; font-size: 12px; color: #777; line-height: 1.6; }
+        .btn-tg { 
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: linear-gradient(90deg, #24A1DE, #1c82b6); color: white; 
+            text-decoration: none; padding: 18px; border-radius: 20px; font-weight: bold; 
+            font-size: 18px; transition: 0.3s; box-shadow: 0 10px 25px rgba(36, 161, 222, 0.3);
+        }
+        .btn-tg:active { transform: scale(0.96); }
+        .notice { margin-top: 25px; font-size: 11px; color: #555; line-height: 1.6; }
     </style>
 </head>
 <body>
+    <!-- 前景金币 -->
     <div class="foreground-coins" id="coin-canvas"></div>
 
     <div class="card">
         <div class="card-inner">
+            <!-- 回归初始 Logo 区域 -->
             <div class="logo-area">
-                <!-- 这里的路径请确保正确 -->
-                <img src="Gold-8-profile-logo-and-Banner.png" alt="Logo" onerror="this.style.opacity='0'">
+                <div class="logo">
+                    <img src="Gold-8-profile-logo-and-Banner.png" alt="Gold 8 Logo" onerror="this.style.background='#333'">
+                </div>
+                <div class="verified-badge">Verified</div>
             </div>
-            <h1>VIP Gold 8 Service</h1>
-            <div class="status"><span class="dot"></span> Online ဝန်ဆောင်မှုရှိနေပါသည်</div>
             
+            <h1>VIP Gold Service</h1>
+            <div class="status"><span class="dot"></span> Online ဝန်ဆောင်မှုရှိနေပါသည်</div>
+
+            <!-- 并列支付展示 (极大化 Logo) -->
             <div class="pay-row">
                 <div class="pay-box">
-                    <img src="Kpay.png" class="pay-icon" alt="K" onerror="this.style.background='#0056B3'">
-                    <div><strong>KBZPay</strong></div>
+                    <img src="Kpay.png" class="pay-icon" alt="KPay" onerror="this.style.background='#0056B3'">
+                    <div class="pay-info">
+                        <span>ငွေသွင်း/ငွေထုတ်</span>
+                        <strong>KBZPay</strong>
+                    </div>
                 </div>
                 <div class="pay-box">
-                    <img src="WavePay.png" class="pay-icon" alt="W" onerror="this.style.background='#F6C000'">
-                    <div><strong>WavePay</strong></div>
+                    <img src="WavePay.png" class="pay-icon" alt="WavePay" onerror="this.style.background='#F6C000'">
+                    <div class="pay-info">
+                        <span>ငွေသွင်း/ငွေထုတ်</span>
+                        <strong>WavePay</strong>
+                    </div>
                 </div>
             </div>
 
-            <div class="btn-group">
-                <a href="https://t.me" class="btn btn-tg">Telegram တွင် ဆက်သွယ်ပါ</a>
-                <a href="viber://chat?number=%2B95900000000" class="btn btn-viber">Viber တွင် ဆက်သွယ်ပါ</a>
+            <a href="https://t.me" class="btn-tg">
+                Telegram တွင် ဆက်သွယ်ပါ
+            </a>
+
+            <div class="notice">
+                မြန်မာနိုင်ငံ၏ စိတ်ချရဆုံးနှင့် အမြန်ဆန်ဆုံး ဝန်ဆောင်မှု<br>
+                (၂၄) နာရီ စိတ်ကြိုက်မေးမြန်းနိုင်ပါသည်
             </div>
-            <div class="notice">မြန်မာနိုင်ငံ၏ စိတ်ချရဆုံးနှင့် အမြန်ဆန်ဆုံး ဝန်ဆောင်မှု</div>
         </div>
     </div>
 
@@ -165,7 +163,6 @@
         function createCoin() {
             const coin = document.createElement('div');
             coin.className = 'coin';
-            
             coin.innerHTML = `
                 <div class="coin-inner">
                     <div class="side"></div>
@@ -173,26 +170,14 @@
                     <div class="back face"></div>
                 </div>
             `;
-            
             coin.style.left = Math.random() * 100 + 'vw';
-            
-            // 下落速度调慢：4秒到7秒之间随机
-            const duration = Math.random() * 3 + 4;
+            const duration = Math.random() * 3 + 4; // 慢速飘落 (4s-7s)
             coin.style.animationDuration = duration + 's';
-            
-            const scale = Math.random() * 0.4 + 0.8;
-            coin.style.transform = `scale(${scale})`;
-
             canvas.appendChild(coin);
-
-            // 掉出屏幕后移除
-            setTimeout(() => {
-                coin.remove();
-            }, duration * 1000);
+            setTimeout(() => { coin.remove(); }, duration * 1000);
         }
-
-        // 数量减稀：每 250 毫秒生成一个
-        setInterval(createCoin, 250);
+        // 低频数量：每 300 毫秒一个
+        setInterval(createCoin, 300);
     </script>
 </body>
 </html>
