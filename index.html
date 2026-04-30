@@ -78,7 +78,7 @@
         .dot { width: 8px; height: 8px; background: #00c853; border-radius: 50%; animation: blink 1.2s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* 游戏展示 */
+        /* 游戏展示 - 修复边角被覆盖问题 */
         .game-section { margin-bottom: 20px; }
         .game-label { font-size: 9px; color: var(--gold-light); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; display: block; opacity: 0.7; }
         .game-row { display: flex; justify-content: center; gap: 15px; }
@@ -87,8 +87,12 @@
             border-radius: 20px; border: 1.5px solid rgba(212, 175, 55, 0.4);
             display: flex; align-items: center; justify-content: center; overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            padding: 5px; /* 增加内边距，防止贴边被圆角切掉 */
         }
-        .game-box img { width: 100%; height: 100%; object-fit: cover; }
+        .game-box img { 
+            width: 100%; height: 100%; 
+            object-fit: contain; /* 改为 contain，确保 Logo 完整不被裁剪 */
+        }
 
         /* 支付图标 */
         .pay-row { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; }
@@ -97,7 +101,7 @@
         .pay-icon-wrapper img { width: 100%; height: 100%; object-fit: cover; }
         .pay-info strong { color: #fff; font-size: 12px; }
 
-        /* 按钮组 - 加入充值文案 */
+        /* 按钮组 - 去除中文 */
         .btn-group { display: flex; flex-direction: column; gap: 12px; }
         .btn { display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none; padding: 14px; border-radius: 22px; color: white; transition: 0.3s; }
         .btn-main { font-weight: bold; font-size: 16px; }
@@ -151,15 +155,15 @@
                 </div>
             </div>
 
-            <!-- 按钮组 -->
+            <!-- 按钮组 - 已去除中文 -->
             <div class="btn-group">
                 <a href="https://t.me" class="btn btn-tg">
                     <span class="btn-main">Telegram တွင် ဆက်သွယ်ပါ</span>
-                    <span class="btn-sub">ဂိမ်းယူနစ်ဝယ်ယူရန် (充值点数)</span>
+                    <span class="btn-sub">ဂိမ်းယူနစ်ဝယ်ယူရန်</span>
                 </a>
                 <a href="viber://chat?number=%2B95900000000" class="btn btn-viber">
                     <span class="btn-main">Viber တွင် ဆက်သွယ်ပါ</span>
-                    <span class="btn-sub">ဂိမ်းယူနစ်ဝယ်ယူရန် (充值点数)</span>
+                    <span class="btn-sub">ဂိမ်းယူနစ်ဝယ်ယူရန်</span>
                 </a>
             </div>
 
