@@ -5,25 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Myanmar Gold 8 VIP</title>
     <style>
-        :root { --gold: #d4af37; --gold-light: #f9edbe; --tg-blue: #24A1DE; }
+        :root { 
+            --gold: #d4af37; 
+            --gold-light: #f9edbe; 
+            --tg-blue: #24A1DE; 
+            --viber-purple: #7360f2; /* Viber 官方紫色 */
+        }
+        
         body { 
             background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%); 
             color: #fff; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0;
+            overflow: hidden;
         }
         
+        /* 滚动的金币容器 */
         .card { 
-            position: relative; background: rgba(25, 25, 25, 0.9); width: 85%; max-width: 380px; 
+            position: relative; background: rgba(25, 25, 25, 0.95); width: 85%; max-width: 380px; 
             padding: 4px; border-radius: 28px; text-align: center; overflow: hidden;
             backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.2);
         }
+
+        /* 金币流动动画层 */
         .card::before {
-            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(transparent, transparent, transparent, var(--gold));
-            animation: rotate 4s linear infinite; z-index: -1;
+            content: "🪙 🪙 🪙 🪙 🪙 🪙 🪙 🪙 🪙 🪙 🪙 🪙"; 
+            position: absolute; top: -20%; left: -20%; width: 140%; height: 140%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 26px; white-space: nowrap;
+            animation: rotateCoins 8s linear infinite; 
+            z-index: 0;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 5px var(--gold));
         }
-        @keyframes rotate { 100% { transform: rotate(360deg); } }
-        .card-inner { background: #121212; border-radius: 24px; padding: 35px 20px; }
+
+        @keyframes rotateCoins { 
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); } 
+        }
+
+        .card-inner { 
+            position: relative; background: #121212; border-radius: 24px; 
+            padding: 35px 20px; z-index: 1; /* 盖在金币旋转中心上方 */
+        }
 
         .logo-area { position: relative; width: 100px; height: 100px; margin: 0 auto 20px; }
         .logo { 
@@ -37,39 +60,51 @@
         }
 
         h1 { font-size: 24px; color: var(--gold); margin: 10px 0 5px; letter-spacing: 1px; }
-        .status { font-size: 12px; color: #00c853; display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 30px; }
+        .status { font-size: 12px; color: #00c853; display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 25px; }
         .dot { width: 8px; height: 8px; background: #00c853; border-radius: 50%; animation: blink 1.2s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
         /* 支付布局 */
-        .pay-grid { display: flex; flex-direction: column; gap: 12px; margin-bottom: 35px; }
+        .pay-grid { display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px; }
         .pay-box { 
             display: flex; align-items: center; background: rgba(255,255,255,0.05); 
-            padding: 12px 18px; border-radius: 16px; border: 1px solid rgba(212, 175, 55, 0.2);
-            text-align: left; transition: 0.3s;
+            padding: 10px 18px; border-radius: 16px; border: 1px solid rgba(212, 175, 55, 0.1);
+            text-align: left;
         }
-        .pay-icon { width: 38px; height: 38px; border-radius: 10px; margin-right: 15px; }
-        .pay-info span { font-size: 11px; color: #888; display: block; }
-        .pay-info strong { color: #fff; font-size: 16px; }
-        .pay-box:hover { background: rgba(212, 175, 55, 0.08); border-color: var(--gold); }
+        .pay-icon { width: 34px; height: 34px; border-radius: 8px; margin-right: 15px; }
+        .pay-info strong { color: #fff; font-size: 15px; }
 
-        .btn-tg { 
+        /* 按钮组 */
+        .btn-group { display: flex; flex-direction: column; gap: 12px; }
+        .btn { 
             display: flex; align-items: center; justify-content: center; gap: 10px;
-            background: linear-gradient(90deg, #24A1DE, #1c82b6); color: white; 
-            text-decoration: none; padding: 18px; border-radius: 20px; font-weight: bold; 
-            font-size: 18px; transition: 0.3s; box-shadow: 0 10px 25px rgba(36, 161, 222, 0.3);
+            text-decoration: none; padding: 16px; border-radius: 18px; font-weight: bold; 
+            font-size: 16px; transition: 0.3s;
         }
-        .btn-tg:active { transform: scale(0.96); }
-        .notice { margin-top: 25px; font-size: 11px; color: #555; line-height: 1.6; }
+        
+        /* Telegram 按钮 */
+        .btn-tg { 
+            background: linear-gradient(90deg, #24A1DE, #1c82b6); color: white; 
+            box-shadow: 0 6px 15px rgba(36, 161, 222, 0.3);
+        }
+        
+        /* Viber 按钮 */
+        .btn-viber { 
+            background: linear-gradient(90deg, var(--viber-purple), #5d4ed1); color: white; 
+            box-shadow: 0 6px 15px rgba(115, 96, 242, 0.3);
+        }
+
+        .btn:active { transform: scale(0.96); opacity: 0.9; }
+
+        .notice { margin-top: 25px; font-size: 11px; color: #666; line-height: 1.6; }
     </style>
 </head>
 <body>
     <div class="card">
         <div class="card-inner">
-            <!-- 你的 Logo 图片 -->
             <div class="logo-area">
                 <div class="logo">
-                    <img src="Gold-8-profile-logo-and-Banner.png" style="width:100%; height:100%; border-radius:25px; object-fit:cover;">
+                    <img src="Gold-8-profile-logo-and-Banner.png" alt="Logo" onerror="this.style.background='#222'">
                 </div>
                 <div class="verified-badge">Verified</div>
             </div>
@@ -77,30 +112,28 @@
             <h1>VIP Gold 8 Service</h1>
             <div class="status"><span class="dot"></span> Online ဝန်ဆောင်မှုရှိနေပါသည်</div>
 
-            <!-- 支付方式：KPay & WavePay -->
             <div class="pay-grid">
-                <!-- KBZPay -->
                 <div class="pay-box">
-                    <img src="Kpay.png" class="pay-icon" alt="KPay" onerror="this.src='https://gstatic.com'">
-                    <div class="pay-info">
-                        <span>ငွေသွင်း/ငွေထုတ်</span>
-                        <strong>KBZPay</strong>
-                    </div>
+                    <img src="Kpay.png" class="pay-icon" alt="K" onerror="this.style.background='#eee'">
+                    <div class="pay-info"><strong>KBZPay</strong></div>
                 </div>
-                <!-- WavePay -->
                 <div class="pay-box">
-                    <img src="WavePay.png" class="pay-icon" alt="WavePay" onerror="this.src='https://gstatic.com'">
-                    <div class="pay-info">
-                        <span>ငွေသွင်း/ငွေထုတ်</span>
-                        <strong>WavePay</strong>
-                    </div>
+                    <img src="WavePay.png" class="pay-icon" alt="W" onerror="this.style.background='#eee'">
+                    <div class="pay-info"><strong>WavePay</strong></div>
                 </div>
             </div>
 
-            <!-- 按钮 -->
-            <a href="https://t.me" class="btn-tg">
-                Telegram တွင် ဆက်သွယ်ပါ
-            </a>
+            <div class="btn-group">
+                <!-- Telegram 按钮 -->
+                <a href="https://t.me" class="btn btn-tg">
+                    Telegram တွင် ဆက်သွယ်ပါ
+                </a>
+
+                <!-- Viber 按钮 -->
+                <a href="viber://chat?number=%2B95900000000" class="btn btn-viber">
+                    Viber တွင် ဆက်သွယ်ပါ
+                </a>
+            </div>
 
             <div class="notice">
                 မြန်မာနိုင်ငံ၏ စိတ်ချရဆုံးနှင့် အမြန်ဆန်ဆုံး ဝန်ဆောင်မှု<br>
