@@ -26,15 +26,13 @@
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 999; perspective: 1000px;
         }
-
         .coin {
             position: absolute; top: -60px; width: 36px; height: 36px;
             transform-style: preserve-3d; animation: fall-slow linear forwards;
         }
         .coin-inner {
             position: relative; width: 100%; height: 100%;
-            transform-style: preserve-3d; 
-            animation: rotate-flat 4s linear infinite;
+            transform-style: preserve-3d; animation: rotate-flat 4s linear infinite;
         }
         .face {
             position: absolute; width: 100%; height: 100%; border-radius: 50%;
@@ -56,7 +54,7 @@
         @keyframes rotate-flat { 0% { transform: rotateZ(0deg); } 100% { transform: rotateZ(360deg); } }
         @keyframes fall-slow { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(115vh); opacity: 1; } }
 
-        /* 发光卡片容器 */
+        /* 卡片容器 */
         .card { 
             position: relative; background: rgba(20, 20, 20, 0.95); width: 88%; max-width: 380px; 
             padding: 4px; border-radius: 35px; text-align: center; overflow: hidden;
@@ -82,31 +80,18 @@
 
         h1 { font-size: 22px; color: var(--gold); margin: 5px 0; font-weight: 800; }
         
-        /* 【优化对齐】闪烁绿点与 Online 文字 */
+        /* 状态对齐 */
         .status { 
-            font-size: 12px; 
-            color: #44eb87; 
-            display: flex; 
-            align-items: center; /* 垂直居中对齐 */
-            justify-content: center; 
-            gap: 6px; 
-            margin-bottom: 18px; 
-            line-height: 1; /* 统一行高防止偏移 */
+            font-size: 12px; color: #44eb87; 
+            display: flex; align-items: center; justify-content: center; 
+            gap: 6px; margin-bottom: 18px; line-height: 1;
         }
         .dot { 
-            width: 8px; 
-            height: 8px; 
-            background: #00c853; 
-            border-radius: 50%; 
-            box-shadow: 0 0 8px #00c853; 
-            animation: blink-dot 1.2s infinite ease-in-out; 
-            display: inline-block;
-            flex-shrink: 0; /* 防止点被压缩 */
+            width: 8px; height: 8px; background: #00c853; border-radius: 50%; 
+            box-shadow: 0 0 8px #00c853; animation: blink-dot 1.2s infinite ease-in-out; 
+            flex-shrink: 0;
         }
-        @keyframes blink-dot { 
-            0%, 100% { opacity: 1; transform: scale(1); } 
-            50% { opacity: 0.3; transform: scale(0.85); } 
-        }
+        @keyframes blink-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.85); } }
 
         /* 游戏展示 */
         .game-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
@@ -128,9 +113,17 @@
         .btn-tg { background: linear-gradient(90deg, #24A1DE, #1c82b6); }
         .btn-viber { background: linear-gradient(90deg, #7360f2, #5d4ed1); }
 
-        /* 通知栏 */
+        /* 【优化】R标缩小并定位在右上角 */
         .notice { margin-top: 20px; font-size: 11px; color: #777; line-height: 1.6; }
         .brand-bold { color: var(--gold-light); font-weight: bold; }
+        sup { 
+            font-size: 7px; /* 进一步缩小R标 */
+            vertical-align: top; 
+            position: relative;
+            top: -2px; /* 向上微调 */
+            left: 1px;
+            font-weight: normal; /* 标号不需要加粗 */
+        }
     </style>
 </head>
 <body>
@@ -144,7 +137,6 @@
             </div>
             <h1>Gold 8 VIP Service</h1>
             
-            <!-- 已对齐的对齐区域 -->
             <div class="status">
                 <span class="dot"></span>
                 <span>Online - အခုဆက်သွယ်နိုင်ပါသည်</span>
@@ -176,8 +168,10 @@
                     <span class="btn-sub">ဂိမ်းယူနစ်ဝယ်ယူရန်</span>
                 </a>
             </div>
+            
+            <!-- 使用 sup 标签实现右上角上标效果 -->
             <div class="notice">
-                <span class="brand-bold">Club388® & Batman688®</span> တိုက်ရိုက်အေးဂျင့်<br>
+                <span class="brand-bold">Club388<sup>®</sup> & Batman688<sup>®</sup></span> တိုက်ရိုက်အေးဂျင့်<br>
                 ယူနစ်သွင်း/ထုတ် မြန်ဆန်စိတ်ချရပါသည်
             </div>
         </div>
