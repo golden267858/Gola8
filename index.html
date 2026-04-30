@@ -1,88 +1,132 @@
 <!DOCTYPE html>
-<html lang="my">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Myanmar Gold VIP</title>
+    <title>Special Offer - 100% Bonus</title>
+    <!-- 引入 Font Awesome 矢量图标 -->
+    <link rel="stylesheet" href="https://cloudflare.com">
+    
     <style>
-        :root { --gold: #d4af37; --gold-light: #f9edbe; --tg-blue: #24A1DE; }
-        body { 
-            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%); 
-            color: #fff; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; 
+        :root {
+            --gold: #d4af37;
+            --black: #0d0d0d;
         }
+
+        body {
+            background-color: var(--black);
+            color: #fff;
+            font-family: 'PingFang SC', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #1a1a1a, #050505);
+            padding: 40px 20px;
+            border-radius: 24px;
+            border: 1px solid #333;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            text-align: center;
+            max-width: 360px;
+            width: 90%;
+            position: relative;
+        }
+
+        /* 1. 动态优惠文案与呼吸灯动画 */
+        .bonus-badge {
+            color: var(--gold);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: block;
+            /* 呼吸灯缩放动画 */
+            animation: breathe 2s infinite ease-in-out;
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 1; text-shadow: 0 0 15px var(--gold); }
+        }
+
+        .local-icon {
+            width: 90px;
+            height: 90px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        h2 { color: #fff; margin: 0; font-size: 1.4rem; }
         
-        /* 流光边框卡片 */
-        .card { 
-            position: relative; background: rgba(25, 25, 25, 0.9); width: 85%; max-width: 380px; 
-            padding: 40px 25px; border-radius: 24px; text-align: center; overflow: hidden;
-            backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.2);
-        }
-        .card::before {
-            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(transparent, transparent, transparent, var(--gold));
-            animation: rotate 4s linear infinite; z-index: -1;
-        }
-        @keyframes rotate { 100% { transform: rotate(360deg); } }
-        .card-inner { background: #121212; border-radius: 22px; padding: 30px 20px; }
-
-        .logo-area { position: relative; width: 90px; height: 90px; margin: 0 auto 20px; }
-        .logo { 
-            width: 100%; height: 100%; background: linear-gradient(135deg, var(--gold), #8a6d3b); 
-            border-radius: 25px; display: flex; justify-content: center; align-items: center; 
-            font-size: 45px; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-        }
-        .verified-badge { 
-            position: absolute; bottom: -5px; right: -5px; background: #00c853; 
-            color: white; font-size: 10px; padding: 4px 8px; border-radius: 10px; border: 2px solid #121212;
+        /* 立即下载按钮 */
+        .btn-main {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(to bottom, var(--gold), #aa8a2e);
+            color: #000;
+            padding: 14px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 25px;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(212,175,55,0.4);
         }
 
-        h1 { font-size: 24px; color: var(--gold); margin: 10px 0 5px; letter-spacing: 1px; }
-        .status { font-size: 12px; color: #00c853; display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 25px; }
-        .dot { width: 8px; height: 8px; background: #00c853; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-
-        .pay-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px; }
-        .pay-box { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 13px; }
-        .pay-box strong { color: var(--gold-light); display: block; margin-top: 4px; }
-
-        .btn-tg { 
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            background: linear-gradient(90deg, #24A1DE, #1c82b6); color: white; 
-            text-decoration: none; padding: 20px; border-radius: 18px; font-weight: bold; 
-            font-size: 18px; transition: 0.3s; box-shadow: 0 8px 25px rgba(36, 161, 222, 0.3);
+        /* 3. 跳转提示语 */
+        .redirect-tip {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #555;
+            display: block;
         }
-        .btn-tg:active { transform: scale(0.95); }
 
-        .notice { margin-top: 25px; font-size: 11px; color: #666; line-height: 1.6; }
+        .redirect-tip i {
+            animation: rotate 2s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
+
     <div class="card">
-        <div class="card-inner">
-            <div class="logo-area">
-                <div class="logo">👑</div>
-                <div class="verified-badge">Verified</div>
-            </div>
-            
-            <h1>VIP Gold Service</h1>
-            <div class="status"><span class="dot"></span> Online ဝန်ဆောင်မှုရှိနေပါသည်</div>
+        <!-- 缅语：100% Bonus (已配呼吸灯动画) -->
+        <span class="bonus-badge">၁၀၀% ဘောနပ်စ် (Bonus)</span>
 
-            <div class="pay-grid">
-                <div class="pay-box">ငွေသွင်း/ငွေထုတ် <strong>Kpay</strong></div>
-                <div class="pay-box">ငွေသွင်း/ငွေထုတ် <strong>WavePay</strong></div>
-            </div>
+        <!-- 引用本地图标 -->
+        <img src="kpay.png" alt="Logo" class="local-icon">
 
-            <!-- ⚠️ 替换下方的链接 -->
-            <a href="https://你的BeMob链接" class="btn-tg">
-                Telegram တွင် ဆက်သွယ်ပါ
-            </a>
+        <h2>项目已就绪</h2>
+        <p style="color: #888; font-size: 14px;">点击下方按钮立即领取优惠并进入下载</p>
 
-            <div class="notice">
-                မြန်မာနိုင်ငံ၏ စိတ်ချရဆုံးနှင့် အမြန်ဆန်ဆုံး ဝန်ဆောင်မှု<br>
-                (၂၄) နာရီ စိတ်ကြိုက်မေးမြန်းနိုင်ပါသည်
-            </div>
-        </div>
+        <!-- 按钮跳转链接 -->
+        <a href="https://你的BeMob链接" class="btn-main">
+            <i class="fas fa-download"></i> 立即下载
+        </a>
+
+        <!-- 自动跳转提示 -->
+        <span class="redirect-tip">
+            <i class="fas fa-spinner"></i> 正在自动跳转至安全链接...
+        </span>
     </div>
+
+    <!-- 2. 3秒强制跳转脚本 -->
+    <script>
+        setTimeout(function() {
+            // 请将此处换成你真实的 BeMob 链接
+            window.location.href = "https://你的BeMob链接";
+        }, 3000); // 3000毫秒 = 3秒
+    </script>
+
 </body>
 </html>
