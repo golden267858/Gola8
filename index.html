@@ -1,120 +1,88 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="my">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>项目就绪 - 最终版</title>
-    <!-- 引入 Font Awesome 用于矢量小图标 -->
-    <link rel="stylesheet" href="https://cloudflare.com">
-    
+    <title>Myanmar Gold VIP</title>
     <style>
-        :root {
-            --gold-primary: #d4af37;
-            --gold-dark: #aa8a2e;
-            --black-bg: #0d0d0d;
+        :root { --gold: #d4af37; --gold-light: #f9edbe; --tg-blue: #24A1DE; }
+        body { 
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%); 
+            color: #fff; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; 
+        }
+        
+        /* 流光边框卡片 */
+        .card { 
+            position: relative; background: rgba(25, 25, 25, 0.9); width: 85%; max-width: 380px; 
+            padding: 40px 25px; border-radius: 24px; text-align: center; overflow: hidden;
+            backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .card::before {
+            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: conic-gradient(transparent, transparent, transparent, var(--gold));
+            animation: rotate 4s linear infinite; z-index: -1;
+        }
+        @keyframes rotate { 100% { transform: rotate(360deg); } }
+        .card-inner { background: #121212; border-radius: 22px; padding: 30px 20px; }
+
+        .logo-area { position: relative; width: 90px; height: 90px; margin: 0 auto 20px; }
+        .logo { 
+            width: 100%; height: 100%; background: linear-gradient(135deg, var(--gold), #8a6d3b); 
+            border-radius: 25px; display: flex; justify-content: center; align-items: center; 
+            font-size: 45px; box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+        .verified-badge { 
+            position: absolute; bottom: -5px; right: -5px; background: #00c853; 
+            color: white; font-size: 10px; padding: 4px 8px; border-radius: 10px; border: 2px solid #121212;
         }
 
-        body {
-            background-color: var(--black-bg);
-            color: #fff;
-            font-family: 'PingFang SC', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-        }
+        h1 { font-size: 24px; color: var(--gold); margin: 10px 0 5px; letter-spacing: 1px; }
+        .status { font-size: 12px; color: #00c853; display: flex; align-items: center; justify-content: center; gap: 5px; margin-bottom: 25px; }
+        .dot { width: 8px; height: 8px; background: #00c853; border-radius: 50%; display: inline-block; animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        .card {
-            background: linear-gradient(145deg, #1a1a1a, #050505);
-            padding: 3rem;
-            border-radius: 20px;
-            border: 1px solid #333;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-            text-align: center;
-            max-width: 400px;
-        }
+        .pay-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 30px; }
+        .pay-box { background: rgba(255,255,255,0.05); padding: 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); font-size: 13px; }
+        .pay-box strong { color: var(--gold-light); display: block; margin-top: 4px; }
 
-        /* 本地上传图标的展示容器 */
-        .local-icon-box {
-            margin-bottom: 1.5rem;
+        .btn-tg { 
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: linear-gradient(90deg, #24A1DE, #1c82b6); color: white; 
+            text-decoration: none; padding: 20px; border-radius: 18px; font-weight: bold; 
+            font-size: 18px; transition: 0.3s; box-shadow: 0 8px 25px rgba(36, 161, 222, 0.3);
         }
+        .btn-tg:active { transform: scale(0.95); }
 
-        .local-icon-box img {
-            width: 80px;
-            height: 80px;
-            border-radius: 18px;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-            border: 2px solid var(--gold-primary);
-        }
-
-        h2 { color: var(--gold-primary); margin: 0 0 10px; font-weight: 500; }
-        p { color: #888; font-size: 14px; line-height: 1.6; }
-
-        /* 黑金风格下载按钮 */
-        .btn-download {
-            display: inline-flex;
-            align-items: center;
-            background: linear-gradient(to bottom, var(--gold-primary), var(--gold-dark));
-            color: #000;
-            padding: 12px 35px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 25px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-        }
-
-        .btn-download:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
-            filter: brightness(1.1);
-        }
-
-        .btn-download i {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-
-        /* 底部矢量图标组 */
-        .footer-icons {
-            margin-top: 30px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            color: #444;
-        }
-
-        .footer-icons i:hover {
-            color: var(--gold-primary);
-            cursor: pointer;
-        }
+        .notice { margin-top: 25px; font-size: 11px; color: #666; line-height: 1.6; }
     </style>
 </head>
 <body>
-
     <div class="card">
-        <!-- 这里引用你上传的本地图标 -->
-        <div class="local-icon-box">
-            <img src="kpay.png" alt="Logo">
-        </div>
+        <div class="card-inner">
+            <div class="logo-area">
+                <div class="logo">👑</div>
+                <div class="verified-badge">Verified</div>
+            </div>
+            
+            <h1>VIP Gold Service</h1>
+            <div class="status"><span class="dot"></span> Online ဝန်ဆောင်မှုရှိနေပါသည်</div>
 
-        <h2>项目已就绪</h2>
-        <p>这是一个整合了矢量图标与本地资源的最终版。您可以根据需要通过类名或路径更换资源。</p>
+            <div class="pay-grid">
+                <div class="pay-box">ငွေသွင်း/ငွေထုတ် <strong>Kpay</strong></div>
+                <div class="pay-box">ငွေသွင်း/ငွေထုတ် <strong>WavePay</strong></div>
+            </div>
 
-        <!-- 下载按钮：整合了 FontAwesome 矢量图标 -->
-        <a href="your-file-path.zip" class="btn-download" download>
-            <i class="fas fa-cloud-arrow-down"></i> 立即下载
-        </a>
+            <!-- ⚠️ 替换下方的链接 -->
+            <a href="https://你的BeMob链接" class="btn-tg">
+                Telegram တွင် ဆက်သွယ်ပါ
+            </a>
 
-        <!-- 装饰性矢量图标 -->
-        <div class="footer-icons">
-            <i class="fab fa-github"></i>
-            <i class="fas fa-shield-halved"></i>
-            <i class="fas fa-circle-check"></i>
+            <div class="notice">
+                မြန်မာနိုင်ငံ၏ စိတ်ချရဆုံးနှင့် အမြန်ဆန်ဆုံး ဝန်ဆောင်မှု<br>
+                (၂၄) နာရီ စိတ်ကြိုက်မေးမြန်းနိုင်ပါသည်
+            </div>
         </div>
     </div>
-
 </body>
 </html>
