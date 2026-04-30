@@ -10,6 +10,7 @@
             --gold-light: #f9edbe; 
             --gold-bright: #fff9e6;
             --tg-blue: #24A1DE; 
+            --viber-purple: #7360f2;
         }
         
         body { 
@@ -19,14 +20,12 @@
             min-height: 100vh; margin: 0; overflow: hidden;
         }
 
-        /* 3D 金币画布 */
+        /* 3D 前景金币 */
         .foreground-coins {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 999; perspective: 1000px;
         }
-
-        /* 小尺寸 3D 金币 */
         .coin {
             position: absolute; top: -60px; width: 36px; height: 36px;
             transform-style: preserve-3d; animation: fall-slow linear forwards;
@@ -38,13 +37,12 @@
         .face {
             position: absolute; width: 100%; height: 100%; border-radius: 50%;
             background: conic-gradient(from 0deg, var(--gold) 0%, var(--gold-bright) 25%, var(--gold-light) 50%, var(--gold-bright) 75%, var(--gold) 100%);
-            border: 1px solid var(--gold-light); display: flex; align-items: center; justify-content: center;
-            box-shadow: inset 0 0 5px rgba(255,255,255,0.5);
+            border: 1.1px solid var(--gold-bright); display: flex; align-items: center; justify-content: center;
+            box-shadow: inset 0 0 5px rgba(255,255,255,0.4);
         }
-        /* MMK 字体极大化 */
         .face::after {
             content: "MMK"; font-size: 13px; font-weight: 900; color: #7d5e00;
-            text-shadow: 0.5px 0.5px 0px rgba(255,255,255,0.5);
+            text-shadow: 0.5px 0.5px 0px rgba(255,255,255,0.4);
         }
         .front { transform: translateZ(2px); }
         .back  { transform: translateZ(-2px) rotateY(180deg); }
@@ -60,9 +58,9 @@
             100% { transform: translateY(110vh); opacity: 1; }
         }
 
-        /* 初始代码中的旋转发光卡片结构 */
+        /* 旋转金光边框卡片结构 */
         .card { 
-            position: relative; background: rgba(25, 25, 25, 0.9); width: 85%; max-width: 380px; 
+            position: relative; background: rgba(25, 25, 25, 0.9); width: 88%; max-width: 380px; 
             padding: 4px; border-radius: 28px; text-align: center; overflow: hidden;
             backdrop-filter: blur(10px); border: 1px solid rgba(212, 175, 55, 0.2); z-index: 10;
         }
@@ -72,10 +70,10 @@
             animation: rotate-border 4s linear infinite; z-index: -1;
         }
         @keyframes rotate-border { 100% { transform: rotate(360deg); } }
-        .card-inner { background: #121212; border-radius: 24px; padding: 35px 20px; }
+        .card-inner { background: #121212; border-radius: 24px; padding: 30px 18px; }
 
-        /* 初始 Logo 区域结构 */
-        .logo-area { position: relative; width: 100px; height: 100px; margin: 0 auto 20px; }
+        /* Logo 区域与 Verified 勋章 */
+        .logo-area { position: relative; width: 100px; height: 100px; margin: 0 auto 15px; }
         .logo { 
             width: 100%; height: 100%; border-radius: 25px; overflow: hidden;
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); border: 2.5px solid var(--gold);
@@ -86,39 +84,49 @@
             color: white; font-size: 10px; padding: 4px 8px; border-radius: 10px; border: 2px solid #121212;
         }
 
-        h1 { font-size: 24px; color: var(--gold); margin: 10px 0 5px; letter-spacing: 1px; }
-        .status { font-size: 12px; color: #00c853; display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 25px; }
+        h1 { font-size: 22px; color: var(--gold); margin: 10px 0 5px; letter-spacing: 1px; }
+        .status { font-size: 12px; color: #00c853; display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 20px; }
         .dot { width: 8px; height: 8px; background: #00c853; border-radius: 50%; animation: blink 1.2s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* 并列巨型支付布局 */
-        .pay-row { display: flex; justify-content: center; gap: 12px; margin-bottom: 30px; }
+        /* 并列支付图标 */
+        .pay-row { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; }
         .pay-box { 
             flex: 1; display: flex; flex-direction: column; align-items: center; 
-            background: rgba(255,255,255,0.05); padding: 15px 5px; border-radius: 20px; 
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            background: rgba(255,255,255,0.05); padding: 12px 5px; border-radius: 18px; 
+            border: 1px solid rgba(212, 175, 55, 0.15);
         }
-        .pay-icon { width: 80px; height: 80px; border-radius: 15px; margin-bottom: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
-        .pay-info strong { color: #fff; font-size: 14px; }
-        .pay-info span { font-size: 10px; color: #888; display: block; margin-bottom: 2px; }
+        .pay-icon { width: 80px; height: 80px; border-radius: 15px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
+        .pay-info strong { color: #fff; font-size: 13px; }
+        .pay-info span { font-size: 9px; color: #888; display: block; }
 
-        .btn-tg { 
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            background: linear-gradient(90deg, #24A1DE, #1c82b6); color: white; 
-            text-decoration: none; padding: 18px; border-radius: 20px; font-weight: bold; 
-            font-size: 18px; transition: 0.3s; box-shadow: 0 10px 25px rgba(36, 161, 222, 0.3);
+        /* 按钮组：上下排列 */
+        .btn-group { display: flex; flex-direction: column; gap: 12px; }
+        .btn { 
+            display: flex; align-items: center; justify-content: center; 
+            text-decoration: none; padding: 16px; border-radius: 18px; 
+            font-weight: bold; font-size: 17px; color: white; transition: 0.3s;
         }
-        .btn-tg:active { transform: scale(0.96); }
-        .notice { margin-top: 25px; font-size: 11px; color: #555; line-height: 1.6; }
+        .btn-tg { 
+            background: linear-gradient(90deg, #24A1DE, #1c82b6); 
+            box-shadow: 0 8px 20px rgba(36, 161, 222, 0.3);
+        }
+        .btn-viber { 
+            background: linear-gradient(90deg, #7360f2, #5d4ed1); 
+            box-shadow: 0 8px 20px rgba(115, 96, 242, 0.3);
+        }
+        .btn:active { transform: scale(0.96); }
+
+        .notice { margin-top: 25px; font-size: 10px; color: #555; line-height: 1.5; }
     </style>
 </head>
 <body>
-    <!-- 前景金币 -->
+    <!-- 金币动画画布 -->
     <div class="foreground-coins" id="coin-canvas"></div>
 
     <div class="card">
         <div class="card-inner">
-            <!-- 回归初始 Logo 区域 -->
+            <!-- 回归您初始代码中的 Logo 区域结构 -->
             <div class="logo-area">
                 <div class="logo">
                     <img src="Gold-8-profile-logo-and-Banner.png" alt="Gold 8 Logo" onerror="this.style.background='#333'">
@@ -129,10 +137,10 @@
             <h1>VIP Gold Service</h1>
             <div class="status"><span class="dot"></span> Online ဝန်ဆောင်မှုရှိနေပါသည်</div>
 
-            <!-- 并列支付展示 (极大化 Logo) -->
+            <!-- 并列展示 80px 巨型支付图标 -->
             <div class="pay-row">
                 <div class="pay-box">
-                    <img src="Kpay.png" class="pay-icon" alt="KPay" onerror="this.style.background='#0056B3'">
+                    <img src="Kpay.png" class="pay-icon" alt="KBZPay" onerror="this.style.background='#0056B3'">
                     <div class="pay-info">
                         <span>ငွေသွင်း/ငွေထုတ်</span>
                         <strong>KBZPay</strong>
@@ -147,9 +155,15 @@
                 </div>
             </div>
 
-            <a href="https://t.me" class="btn-tg">
-                Telegram တွင် ဆက်သွယ်ပါ
-            </a>
+            <!-- 按钮组：上下堆叠排列 -->
+            <div class="btn-group">
+                <a href="https://t.me" class="btn btn-tg">
+                    Telegram တွင် ဆက်သွယ်ပါ
+                </a>
+                <a href="viber://chat?number=%2B95900000000" class="btn btn-viber">
+                    Viber တွင် ဆက်သွယ်ပါ
+                </a>
+            </div>
 
             <div class="notice">
                 မြန်မာနိုင်ငံ၏ စိတ်ချရဆုံးနှင့် အမြန်ဆန်ဆုံး ဝန်ဆောင်မှု<br>
@@ -171,13 +185,13 @@
                 </div>
             `;
             coin.style.left = Math.random() * 100 + 'vw';
-            const duration = Math.random() * 3 + 4; // 慢速飘落 (4s-7s)
+            const duration = Math.random() * 3 + 4; // 优雅的慢速飘落 (4s-7s)
             coin.style.animationDuration = duration + 's';
             canvas.appendChild(coin);
             setTimeout(() => { coin.remove(); }, duration * 1000);
         }
-        // 低频数量：每 300 毫秒一个
-        setInterval(createCoin, 300);
+        // 低频下落：每 350ms 一个
+        setInterval(createCoin, 350);
     </script>
 </body>
 </html>
