@@ -72,39 +72,56 @@
         @keyframes rotate-border { 100% { transform: rotate(360deg); } }
         .card-inner { background: #121212; border-radius: 24px; padding: 30px 18px; }
 
-        /* Logo 区域与 Verified 勋章 */
-        .logo-area { position: relative; width: 100px; height: 100px; margin: 0 auto 15px; }
+        /* Logo 区域与呼吸效果 */
+        .logo-area { 
+            position: relative; 
+            width: 120px; /* 增大后的尺寸 */
+            height: 120px; 
+            margin: 0 auto 20px; 
+            animation: breathe 3s ease-in-out infinite; 
+        }
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4)); }
+            50% { transform: scale(1.05); filter: drop-shadow(0 0 25px rgba(212, 175, 55, 0.8)); }
+        }
         .logo { 
-            width: 100%; height: 100%; border-radius: 25px; overflow: hidden;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); border: 2.5px solid var(--gold);
+            width: 100%; height: 100%; border-radius: 30px; overflow: hidden;
+            border: 2.5px solid var(--gold); background: #1a1a1a;
         }
         .logo img { width: 100%; height: 100%; object-fit: cover; }
+        
         .verified-badge { 
-            position: absolute; bottom: -5px; right: -5px; background: #00c853; 
-            color: white; font-size: 10px; padding: 4px 8px; border-radius: 10px; border: 2px solid #121212;
+            position: absolute; bottom: -2px; right: -2px; background: #00c853; 
+            color: white; font-size: 11px; padding: 4px 10px; border-radius: 12px; 
+            border: 2px solid #121212; z-index: 2;
         }
 
-        h1 { font-size: 22px; color: var(--gold); margin: 10px 0 5px; letter-spacing: 1px; }
-        .status { font-size: 12px; color: #00c853; display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 20px; }
-        .dot { width: 8px; height: 8px; background: #00c853; border-radius: 50%; animation: blink 1.2s infinite; }
+        h1 { font-size: 24px; color: var(--gold); margin: 10px 0 5px; letter-spacing: 1px; }
+        .status { font-size: 13px; color: #44eb87; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 25px; }
+        .dot { width: 9px; height: 9px; background: #00c853; border-radius: 50%; animation: blink 1.2s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* 并列支付图标 */
-        .pay-row { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; }
+        /* 支付图标展示 - 去除白边优化 */
+        .pay-row { display: flex; justify-content: center; gap: 12px; margin-bottom: 30px; }
         .pay-box { 
             flex: 1; display: flex; flex-direction: column; align-items: center; 
-            background: rgba(255,255,255,0.05); padding: 12px 5px; border-radius: 18px; 
+            background: rgba(255,255,255,0.05); padding: 15px 5px; border-radius: 22px; 
             border: 1px solid rgba(212, 175, 55, 0.15);
         }
-        .pay-icon { width: 80px; height: 80px; border-radius: 15px; margin-bottom: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.4); }
-        .pay-info strong { color: #fff; font-size: 13px; }
-        .pay-info span { font-size: 9px; color: #888; display: block; }
+        .pay-icon { 
+            width: 80px; height: 80px; 
+            object-fit: contain; /* 关键：确保图标比例正常 */
+            margin-bottom: 10px; 
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+        }
+        .pay-info strong { color: #fff; font-size: 14px; }
+        .pay-info span { font-size: 9px; color: #888; display: block; margin-bottom: 2px; }
 
-        /* 按钮组：上下排列 */
-        .btn-group { display: flex; flex-direction: column; gap: 12px; }
+        /* 按钮组：上下堆叠排列 */
+        .btn-group { display: flex; flex-direction: column; gap: 15px; }
         .btn { 
             display: flex; align-items: center; justify-content: center; 
-            text-decoration: none; padding: 16px; border-radius: 18px; 
+            text-decoration: none; padding: 18px; border-radius: 22px; 
             font-weight: bold; font-size: 17px; color: white; transition: 0.3s;
         }
         .btn-tg { 
@@ -117,7 +134,7 @@
         }
         .btn:active { transform: scale(0.96); }
 
-        .notice { margin-top: 25px; font-size: 10px; color: #555; line-height: 1.5; }
+        .notice { margin-top: 30px; font-size: 11px; color: #555; line-height: 1.6; }
     </style>
 </head>
 <body>
@@ -126,10 +143,10 @@
 
     <div class="card">
         <div class="card-inner">
-            <!-- 回归您初始代码中的 Logo 区域结构 -->
+            <!-- 增大且带呼吸效果的 Logo 区域 -->
             <div class="logo-area">
                 <div class="logo">
-                    <img src="Gold-8-profile-logo-and-Banner.png" alt="Gold 8 Logo" onerror="this.style.background='#333'">
+                    <img src="Gold-8-profile-logo-and-Banner.png" alt="Gold 8 Logo" onerror="this.style.opacity='0'">
                 </div>
                 <div class="verified-badge">Verified</div>
             </div>
@@ -137,17 +154,17 @@
             <h1>VIP Gold Service</h1>
             <div class="status"><span class="dot"></span> Online ဝန်ဆောင်မှုရှိနေပါသည်</div>
 
-            <!-- 并列展示 80px 巨型支付图标 -->
+            <!-- 并列展示支付图标 -->
             <div class="pay-row">
                 <div class="pay-box">
-                    <img src="Kpay.png" class="pay-icon" alt="KBZPay" onerror="this.style.background='#0056B3'">
+                    <img src="Kpay.png" class="pay-icon" alt="KBZPay" onerror="this.src='https://wikimedia.org'">
                     <div class="pay-info">
                         <span>ငွေသွင်း/ငွေထုတ်</span>
                         <strong>KBZPay</strong>
                     </div>
                 </div>
                 <div class="pay-box">
-                    <img src="WavePay.png" class="pay-icon" alt="WavePay" onerror="this.style.background='#F6C000'">
+                    <img src="WavePay.png" class="pay-icon" alt="WavePay" onerror="this.src='https://wikimedia.org'">
                     <div class="pay-info">
                         <span>ငွေသွင်း/ငွေထုတ်</span>
                         <strong>WavePay</strong>
@@ -185,13 +202,12 @@
                 </div>
             `;
             coin.style.left = Math.random() * 100 + 'vw';
-            const duration = Math.random() * 3 + 4; // 优雅的慢速飘落 (4s-7s)
+            const duration = Math.random() * 3 + 4; 
             coin.style.animationDuration = duration + 's';
             canvas.appendChild(coin);
             setTimeout(() => { coin.remove(); }, duration * 1000);
         }
-        // 低频下落：每 350ms 一个
-        setInterval(createCoin, 350);
+        setInterval(createCoin, 400); // 维持优雅的频率
     </script>
 </body>
 </html>
