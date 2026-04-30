@@ -10,11 +10,10 @@
             --gold-bright: #f1d572;
             --tg-blue: #24A1DE; 
             --viber-purple: #7360f2; 
-            --bg-dark: #0a0a0a;
         }
         
         body { 
-            background: var(--bg-dark);
+            background: #000;
             color: #fff; 
             font-family: 'Segoe UI', Roboto, 'Pyidaungsu', Arial, sans-serif;
             display: flex; justify-content: center; align-items: center; 
@@ -22,137 +21,123 @@
             overflow: hidden;
         }
 
-        /* 背景装饰球（增加空间感） */
-        .bg-glow {
-            position: absolute;
-            width: 300px; height: 300px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
-            z-index: 0;
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
-        }
-
-        /* 外部容器 */
+        /* 外部容器 - 降低 z-index 让金币在前方 */
         .card { 
             position: relative; 
             width: 90%; 
             max-width: 360px; 
             padding: 2px; 
             border-radius: 35px; 
-            z-index: 2;
+            z-index: 5; /* 低于金币的 z-index */
         }
 
-        /* 金币飘落动画优化 */
-        .coins-container {
-            position: absolute;
+        /* 前景金币容器 */
+        .foreground-coins {
+            position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; /* 防止遮挡点击 */
-            z-index: 0;
-            overflow: hidden;
+            pointer-events: none;
+            z-index: 100; /* 确保在最前面 */
         }
 
         .coin {
             position: absolute;
             top: -50px;
-            font-size: 20px;
-            animation: fall linear infinite;
+            font-size: 24px;
+            filter: drop-shadow(0 0 5px rgba(212, 175, 55, 0.8));
+            animation: fall linear forwards;
         }
 
         @keyframes fall {
             0% { transform: translateY(0) rotate(0deg); opacity: 0; }
             10% { opacity: 1; }
             90% { opacity: 1; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+            100% { transform: translateY(calc(100vh - 30px)) rotate(360deg); opacity: 0.8; }
+        }
+
+        /* 底部堆积感渐变 */
+        .bottom-pile {
+            position: fixed;
+            bottom: 0; left: 0; width: 100%; height: 80px;
+            background: linear-gradient(to top, rgba(212, 175, 55, 0.4), transparent);
+            pointer-events: none;
+            z-index: 99;
+            filter: blur(10px);
         }
 
         /* 内部透明卡片 */
         .card-inner { 
             position: relative;
-            background: rgba(25, 25, 25, 0.7); 
-            backdrop-filter: blur(25px); 
-            -webkit-backdrop-filter: blur(25px);
+            background: rgba(15, 15, 15, 0.85); 
+            backdrop-filter: blur(20px); 
+            -webkit-backdrop-filter: blur(20px);
             border-radius: 33px; 
-            padding: 35px 20px; 
+            padding: 40px 20px; 
             border: 1px solid rgba(212, 175, 55, 0.3);
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            box-shadow: 0 0 30px rgba(0,0,0,1);
         }
 
-        .logo-area { position: relative; width: 90px; height: 90px; margin: 0 auto 18px; }
+        .logo-area { width: 90px; height: 90px; margin: 0 auto 15px; }
         .logo { 
             width: 100%; height: 100%; border-radius: 24px; overflow: hidden;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); border: 2px solid var(--gold);
-            background: linear-gradient(45deg, #1a1a1a, #333);
+            border: 2px solid var(--gold);
         }
         .logo img { width: 100%; height: 100%; object-fit: cover; }
 
-        h1 { 
-            font-size: 22px; 
-            color: var(--gold); 
-            margin: 10px 0 5px; 
-            letter-spacing: 1px;
-            background: linear-gradient(to bottom, var(--gold-bright), var(--gold));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+        h1 { font-size: 22px; color: var(--gold); margin: 10px 0; font-weight: 800; }
         
-        .status { 
-            font-size: 13px; color: #44eb87; 
-            display: flex; align-items: center; justify-content: center; 
-            gap: 8px; margin-bottom: 25px; 
-        }
+        .status { font-size: 13px; color: #44eb87; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 30px; }
         .dot { width: 8px; height: 8px; background: #00c853; border-radius: 50%; box-shadow: 0 0 10px #00c853; animation: blink 1.5s infinite; }
-        
-        @keyframes blink { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.8); } }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* 支付布局 */
+        /* 支付 Logo 放大布局 */
         .pay-row { 
             display: flex; 
             justify-content: center; 
-            gap: 12px; 
-            margin-bottom: 30px; 
+            gap: 15px; 
+            margin-bottom: 35px; 
         }
         .pay-box { 
             flex: 1;
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            background: rgba(255,255,255,0.05); 
-            padding: 12px 5px; 
-            border-radius: 20px; 
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: 0.3s;
+            background: rgba(255,255,255,0.08); 
+            padding: 20px 10px; 
+            border-radius: 25px; 
+            border: 1px solid rgba(212, 175, 55, 0.2);
         }
-        .pay-box:hover { background: rgba(212, 175, 55, 0.1); border-color: var(--gold); }
-        .pay-icon { width: 32px; height: 32px; margin-bottom: 8px; border-radius: 8px; }
-        .pay-info strong { color: #ccc; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
+        /* 增大 Logo 尺寸 */
+        .pay-icon { 
+            width: 56px; 
+            height: 56px; 
+            margin-bottom: 12px; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .pay-info strong { color: #fff; font-size: 13px; letter-spacing: 0.5px; }
 
-        /* 按钮组 */
         .btn-group { display: flex; flex-direction: column; gap: 12px; }
         .btn { 
-            display: flex; align-items: center; justify-content: center; gap: 10px;
-            text-decoration: none; padding: 16px; border-radius: 18px; 
-            font-weight: 600; font-size: 15px; transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-decoration: none; padding: 18px; border-radius: 20px; 
+            font-weight: bold; font-size: 16px; transition: 0.3s;
+            color: white;
         }
-        .btn-tg { background: linear-gradient(135deg, #24A1DE, #1c82b6); color: white; }
-        .btn-viber { background: linear-gradient(135deg, var(--viber-purple), #5d4ed1); color: white; }
-        .btn:hover { transform: translateY(-2px); filter: brightness(1.1); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
-        .btn:active { transform: scale(0.96); }
+        .btn-tg { background: linear-gradient(135deg, #24A1DE, #1c82b6); }
+        .btn-viber { background: linear-gradient(135deg, var(--viber-purple), #5d4ed1); }
+        .btn:active { transform: scale(0.95); }
 
-        .notice { margin-top: 25px; font-size: 11px; color: #777; line-height: 1.6; }
+        .notice { margin-top: 25px; font-size: 11px; color: #888; }
     </style>
 </head>
 <body>
-    <div class="bg-glow"></div>
-    
-    <!-- 金币动画层 -->
-    <div class="coins-container" id="coin-box"></div>
+    <!-- 前景金币 -->
+    <div class="foreground-coins" id="coin-canvas"></div>
+    <!-- 底部堆积感 -->
+    <div class="bottom-pile"></div>
 
     <div class="card">
         <div class="card-inner">
             <div class="logo-area">
                 <div class="logo">
-                    <img src="Gold-8-profile-logo-and-Banner.png" alt="Logo" onerror="this.parentElement.style.background='linear-gradient(45deg, #d4af37, #8a6d3b)'">
+                    <img src="Gold-8-profile-logo-and-Banner.png" alt="Logo" onerror="this.style.background='#222'">
                 </div>
             </div>
             
@@ -171,39 +156,44 @@
             </div>
 
             <div class="btn-group">
-                <a href="https://t.me" class="btn btn-tg">
-                    Telegram တွင် ဆက်သွယ်ပါ
-                </a>
-                <a href="viber://chat?number=%2B95900000000" class="btn btn-viber">
-                    Viber တွင် ဆက်သွယ်ပါ
-                </a>
+                <a href="https://t.me" class="btn btn-tg">Telegram တွင် ဆက်သွယ်ပါ</a>
+                <a href="viber://chat?number=%2B95900000000" class="btn btn-viber">Viber တွင် ဆက်သွယ်ပါ</a>
             </div>
 
             <div class="notice">
-                မြန်မာနိုင်ငံ၏ စိတ်ချရဆုံးနှင့် အမြန်ဆန်ဆုံး ဝန်ဆောင်မှု<br>
-                (၂၄) နာရီ စိတ်ကြိုက်မေးမြန်းနိုင်ပါသည်
+                မြန်မာနိုင်ငံ၏ စိတ်ချရဆုံးနှင့် အမြန်ဆန်ဆုံး ဝန်ဆောင်မှု
             </div>
         </div>
     </div>
 
     <script>
-        // 动态生成金币，让画面更灵动
-        const coinBox = document.getElementById('coin-box');
-        const coins = ['🪙', '💰', '✨'];
+        const canvas = document.getElementById('coin-canvas');
         
         function createCoin() {
             const coin = document.createElement('div');
             coin.className = 'coin';
-            coin.innerText = coins[Math.floor(Math.random() * coins.length)];
+            coin.innerText = '🪙';
+            // 随机位置
             coin.style.left = Math.random() * 100 + 'vw';
-            coin.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            coin.style.opacity = Math.random();
-            coinBox.appendChild(coin);
+            // 随机大小，增加层次感
+            const size = Math.random() * 10 + 20; 
+            coin.style.fontSize = size + 'px';
+            // 随机掉落速度
+            const duration = Math.random() * 2 + 3;
+            coin.style.animationDuration = duration + 's';
+            
+            canvas.appendChild(coin);
 
-            setTimeout(() => { coin.remove(); }, 7000);
+            // 动画结束后停留一小会儿再移除，或者模拟堆积消失
+            setTimeout(() => {
+                coin.style.opacity = '0';
+                coin.style.transition = 'opacity 1s';
+                setTimeout(() => coin.remove(), 1000);
+            }, duration * 1000 - 500);
         }
 
-        setInterval(createCoin, 400);
+        // 高频率产生金币，增加数量感
+        setInterval(createCoin, 200);
     </script>
 </body>
 </html>
