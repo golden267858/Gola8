@@ -6,17 +6,16 @@
     <title>Myanmar Gold 8 VIP</title>
     <style>
         :root { 
-            --gold: #d4af37; 
-            --gold-bright: #f1d572;
+            --gold-light: #fff3a6;
+            --gold-mid: #d4af37;
             --gold-dark: #8a6d3b;
-            --tg-blue: #24A1DE; 
-            --viber-purple: #7360f2; 
+            --gold-shadow: #5c441a;
         }
         
         body { 
             background: #000;
             color: #fff; 
-            font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+            font-family: 'Segoe UI', Helvetica, Arial, sans-serif;
             display: flex; justify-content: center; align-items: center; 
             min-height: 100vh; margin: 0;
             overflow: hidden;
@@ -27,89 +26,117 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
-            z-index: 999; 
-            perspective: 1000px;
+            z-index: 999;
+            perspective: 1200px;
         }
 
-        /* 【核心修改】3D 厚度金币 */
+        /* 写实金币 3D 模型 */
         .coin {
             position: absolute;
-            top: -100px;
-            width: 45px; height: 45px;
+            top: -80px;
+            width: 48px; height: 48px;
             transform-style: preserve-3d;
-            animation: fall linear forwards;
+            animation: fall-physics linear forwards;
         }
 
-        /* 金币主体面 */
-        .coin-face {
+        .coin-body {
+            position: relative;
+            width: 100%; height: 100%;
+            transform-style: preserve-3d;
+            animation: spin 3s linear infinite;
+        }
+
+        /* 正反面 - 模拟金属拉丝与高光 */
+        .face {
             position: absolute;
             width: 100%; height: 100%;
             border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, var(--gold-bright) 0%, var(--gold) 60%, var(--gold-dark) 100%);
-            border: 1px solid rgba(255,255,255,0.2);
+            background: conic-gradient(
+                from 0deg,
+                var(--gold-dark) 0%,
+                var(--gold-light) 25%,
+                var(--gold-mid) 50%,
+                var(--gold-light) 75%,
+                var(--gold-dark) 100%
+            );
+            border: 1px solid var(--gold-shadow);
             display: flex; align-items: center; justify-content: center;
-            color: #5c441a; font-weight: 900; font-size: 10px;
-            box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
             backface-visibility: hidden;
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.3);
         }
 
-        .coin-back { transform: rotateY(180deg); }
+        /* 内部刻字圈 */
+        .face::after {
+            content: "MMK";
+            font-size: 10px; font-weight: 900; color: var(--gold-shadow);
+            width: 75%; height: 75%;
+            border-radius: 50%;
+            border: 2px dashed rgba(138, 109, 59, 0.4);
+            display: flex; align-items: center; justify-content: center;
+            text-shadow: 1px 1px 0 rgba(255,255,255,0.2);
+        }
 
-        /* 侧边增加厚度感 */
-        .coin-edge {
+        .back { transform: rotateY(180deg); }
+
+        /* 侧边厚度层 */
+        .side {
             position: absolute;
             width: 100%; height: 100%;
             border-radius: 50%;
             background: var(--gold-dark);
-            transform: translateZ(-3px); /* 厚度值 */
+            transform: translateZ(-4px);
+            border: 1px solid var(--gold-shadow);
         }
 
-        @keyframes fall {
-            0% { transform: translateY(0) rotateX(0deg) rotateY(0deg); opacity: 0; }
-            5% { opacity: 1; }
-            /* 下落到屏幕底部 92% 处停止模拟堆积 */
-            100% { transform: translateY(calc(100vh - 50px)) rotateX(70deg) rotateY(180deg); opacity: 0.9; }
+        /* 动画：物理掉落与堆积 */
+        @keyframes fall-physics {
+            0% { transform: translateY(0) scale(0.8); opacity: 0; }
+            10% { opacity: 1; }
+            95% { transform: translateY(calc(100vh - 45px)) scale(1); }
+            /* 落地后的细微回弹感 */
+            100% { transform: translateY(calc(100vh - 50px)) rotateX(75deg); opacity: 1; }
         }
 
-        /* 底部堆积金光 */
+        @keyframes spin {
+            0% { transform: rotateY(0deg) rotateX(0deg); }
+            100% { transform: rotateY(360deg) rotateX(20deg); }
+        }
+
+        /* 底部堆积发光 */
         .gold-heap {
             position: fixed;
-            bottom: 0; left: 0; width: 100%; height: 150px;
-            background: linear-gradient(to top, rgba(212, 175, 55, 0.4) 0%, transparent 100%);
-            z-index: 998; filter: blur(20px); pointer-events: none;
+            bottom: 0; left: 0; width: 100%; height: 100px;
+            background: radial-gradient(ellipse at bottom, rgba(212, 175, 55, 0.4), transparent 75%);
+            z-index: 998; filter: blur(15px); pointer-events: none;
         }
 
-        /* 卡片主体 */
+        /* 卡片主体（保持之前的高级质感） */
         .card { position: relative; width: 92%; max-width: 380px; z-index: 10; }
         .card-inner { 
-            position: relative; background: rgba(10, 10, 10, 0.85); 
-            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-            border-radius: 33px; padding: 40px 20px; border: 1px solid rgba(212, 175, 55, 0.4);
-            text-align: center; box-shadow: 0 0 50px rgba(0,0,0,0.9);
+            position: relative; background: rgba(15, 15, 15, 0.85); 
+            backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border-radius: 35px; padding: 40px 20px; border: 1px solid rgba(212, 175, 55, 0.3);
+            text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,1);
         }
 
-        /* 80px 支付 Logo */
         .pay-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; }
-        .pay-box { 
-            flex: 1; background: rgba(255,255,255,0.08); padding: 25px 10px; border-radius: 28px; 
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
+        .pay-box { flex: 1; background: rgba(255,255,255,0.06); padding: 25px 10px; border-radius: 28px; border: 1px solid rgba(212, 175, 55, 0.2); }
         .pay-icon { width: 80px; height: 80px; margin-bottom: 12px; border-radius: 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-        .pay-info strong { color: #fff; font-size: 14px; }
-
-        .logo-area { width: 90px; height: 90px; margin: 0 auto 10px; }
-        .logo { width: 100%; height: 100%; border-radius: 24px; overflow: hidden; border: 2px solid var(--gold); }
-        .logo img { width: 100%; height: 100%; object-fit: cover; }
-        h1 { font-size: 24px; color: var(--gold); margin: 10px 0; font-weight: 900; }
-        .status { font-size: 14px; color: #44eb87; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 30px; }
-        .dot { width: 10px; height: 10px; background: #00c853; border-radius: 50%; animation: blink 1.5s infinite; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
         
-        .btn-group { display: flex; flex-direction: column; gap: 15px; }
-        .btn { text-decoration: none; padding: 20px; border-radius: 22px; font-weight: bold; font-size: 17px; color: white; text-align: center; }
+        .logo-area { width: 85px; height: 85px; margin: 0 auto 10px; border: 2px solid var(--gold-mid); border-radius: 22px; overflow: hidden; }
+        .logo img { width: 100%; height: 100%; object-fit: cover; }
+        
+        h1 { font-size: 22px; color: var(--gold-mid); margin: 10px 0; font-weight: 800; letter-spacing: 1px; }
+        .status { font-size: 13px; color: #44eb87; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 30px; }
+        .dot { width: 10px; height: 10px; background: #00c853; border-radius: 50%; box-shadow: 0 0 10px #00c853; animation: blink 1.5s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .btn-group { display: flex; flex-direction: column; gap: 12px; }
+        .btn { text-decoration: none; padding: 18px; border-radius: 20px; font-weight: bold; font-size: 16px; color: white; transition: 0.3s; }
         .btn-tg { background: linear-gradient(135deg, #24A1DE, #1c82b6); }
-        .btn-viber { background: linear-gradient(135deg, var(--viber-purple), #5d4ed1); }
-        .notice { margin-top: 30px; font-size: 12px; color: #999; }
+        .btn-viber { background: linear-gradient(135deg, #7360f2, #5d4ed1); }
+        .btn:active { transform: scale(0.96); }
+        .notice { margin-top: 25px; font-size: 11px; color: #777; }
     </style>
 </head>
 <body>
@@ -119,9 +146,7 @@
     <div class="card">
         <div class="card-inner">
             <div class="logo-area">
-                <div class="logo">
-                    <img src="Gold-8-profile-logo-and-Banner.png" alt="Logo" onerror="this.style.background='#222'">
-                </div>
+                <img src="Gold-8-profile-logo-and-Banner.png" alt="Logo" onerror="this.style.background='#222'">
             </div>
             <h1>VIP Gold 8 Service</h1>
             <div class="status"><span class="dot"></span> Online ဝန်ဆောင်မှုရှိနေပါသည်</div>
@@ -129,11 +154,11 @@
             <div class="pay-row">
                 <div class="pay-box">
                     <img src="Kpay.png" class="pay-icon" alt="K" onerror="this.style.background='#0056B3'">
-                    <div class="pay-info"><strong>KBZPay</strong></div>
+                    <div><strong>KBZPay</strong></div>
                 </div>
                 <div class="pay-box">
                     <img src="WavePay.png" class="pay-icon" alt="W" onerror="this.style.background='#F6C000'">
-                    <div class="pay-info"><strong>WavePay</strong></div>
+                    <div><strong>WavePay</strong></div>
                 </div>
             </div>
 
@@ -148,36 +173,36 @@
     <script>
         const canvas = document.getElementById('coin-canvas');
         function createCoin() {
-            const coinContainer = document.createElement('div');
-            coinContainer.className = 'coin';
+            const coin = document.createElement('div');
+            coin.className = 'coin';
             
-            // 创建 3D 层级
-            coinContainer.innerHTML = `
-                <div class="coin-edge"></div>
-                <div class="coin-face">MMK</div>
-                <div class="coin-face coin-back">MMK</div>
+            coin.innerHTML = `
+                <div class="coin-body">
+                    <div class="side"></div>
+                    <div class="face front"></div>
+                    <div class="face back"></div>
+                </div>
             `;
             
-            // 随机位置与缩放
-            const scale = Math.random() * 0.4 + 0.8;
-            coinContainer.style.left = Math.random() * 100 + 'vw';
-            coinContainer.style.transform = `scale(${scale})`;
+            coin.style.left = Math.random() * 100 + 'vw';
+            const duration = Math.random() * 2 + 1.5;
+            coin.style.animationDuration = duration + 's';
             
-            // 掉落速度
-            const duration = Math.random() * 2 + 2;
-            coinContainer.style.animationDuration = duration + 's';
-            
-            canvas.appendChild(coinContainer);
+            // 随机大小，增加远近透视感
+            const scale = Math.random() * 0.5 + 0.7;
+            coin.style.transform = `scale(${scale})`;
 
-            // 堆积逻辑：掉落完成后不立即移除，停留 8 秒后再消失，模拟底部堆满
+            canvas.appendChild(coin);
+
+            // 落地后持续存在一段时间再消失
             setTimeout(() => {
-                coinContainer.style.transition = 'opacity 2s';
-                coinContainer.style.opacity = '0';
-                setTimeout(() => coinContainer.remove(), 2000);
-            }, duration * 1000 + 8000);
+                coin.style.transition = 'opacity 3s';
+                coin.style.opacity = '0';
+                setTimeout(() => coin.remove(), 3000);
+            }, duration * 1000 + 10000);
         }
 
-        // 高频生成 (每 60ms 一个)
+        // 高频生成
         setInterval(createCoin, 60);
     </script>
 </body>
