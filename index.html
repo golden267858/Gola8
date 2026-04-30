@@ -36,7 +36,6 @@
             transform-style: preserve-3d; 
             animation: rotate-flat 4s linear infinite;
         }
-        
         .face {
             position: absolute; width: 100%; height: 100%; border-radius: 50%;
             background: radial-gradient(circle at 35% 35%, var(--gold-bright) 0%, var(--gold) 50%, var(--gold-dark) 100%);
@@ -45,30 +44,17 @@
             box-shadow: inset 0 0 6px rgba(0,0,0,0.4);
             backface-visibility: hidden;
         }
-        
-        .face::after { 
-            content: "MMK"; font-size: 11px; font-weight: 900; color: #5c441a; 
-        }
-
+        .face::after { content: "MMK"; font-size: 11px; font-weight: 900; color: #5c441a; }
         .side { 
             position: absolute; width: 100%; height: 100%; border-radius: 50%; 
             background: repeating-conic-gradient(from 0deg, var(--gold-dark) 0deg 3deg, var(--gold-bright) 3deg 6deg);
             transform: translateZ(-1px);
         }
-
         .front { transform: translateZ(1px); } 
         .back  { transform: translateZ(-1px) rotateY(180deg); }
 
-        @keyframes rotate-flat { 
-            0% { transform: rotateZ(0deg); } 
-            100% { transform: rotateZ(360deg); } 
-        }
-        
-        @keyframes fall-slow { 
-            0% { transform: translateY(0); opacity: 0; } 
-            10% { opacity: 1; } 
-            100% { transform: translateY(115vh); opacity: 1; } 
-        }
+        @keyframes rotate-flat { 0% { transform: rotateZ(0deg); } 100% { transform: rotateZ(360deg); } }
+        @keyframes fall-slow { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(115vh); opacity: 1; } }
 
         /* 发光卡片容器 */
         .card { 
@@ -96,18 +82,30 @@
 
         h1 { font-size: 22px; color: var(--gold); margin: 5px 0; font-weight: 800; }
         
-        /* 修复后的闪烁绿点样式 */
-        .status { font-size: 12px; color: #44eb87; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 18px; }
+        /* 【优化对齐】闪烁绿点与 Online 文字 */
+        .status { 
+            font-size: 12px; 
+            color: #44eb87; 
+            display: flex; 
+            align-items: center; /* 垂直居中对齐 */
+            justify-content: center; 
+            gap: 6px; 
+            margin-bottom: 18px; 
+            line-height: 1; /* 统一行高防止偏移 */
+        }
         .dot { 
-            width: 8px; height: 8px; 
+            width: 8px; 
+            height: 8px; 
             background: #00c853; 
             border-radius: 50%; 
             box-shadow: 0 0 8px #00c853; 
             animation: blink-dot 1.2s infinite ease-in-out; 
+            display: inline-block;
+            flex-shrink: 0; /* 防止点被压缩 */
         }
         @keyframes blink-dot { 
             0%, 100% { opacity: 1; transform: scale(1); } 
-            50% { opacity: 0.3; transform: scale(0.8); } 
+            50% { opacity: 0.3; transform: scale(0.85); } 
         }
 
         /* 游戏展示 */
@@ -130,7 +128,7 @@
         .btn-tg { background: linear-gradient(90deg, #24A1DE, #1c82b6); }
         .btn-viber { background: linear-gradient(90deg, #7360f2, #5d4ed1); }
 
-        /* 通知栏加粗与R标 */
+        /* 通知栏 */
         .notice { margin-top: 20px; font-size: 11px; color: #777; line-height: 1.6; }
         .brand-bold { color: var(--gold-light); font-weight: bold; }
     </style>
@@ -145,7 +143,12 @@
                 <div class="verified-badge">Verified Agent</div>
             </div>
             <h1>Gold 8 VIP Service</h1>
-            <div class="status"><span class="dot"></span> Online - အခုဆက်သွယ်နိုင်ပါသည်</div>
+            
+            <!-- 已对齐的对齐区域 -->
+            <div class="status">
+                <span class="dot"></span>
+                <span>Online - အခုဆက်သွယ်နိုင်ပါသည်</span>
+            </div>
 
             <div class="game-row">
                 <div class="game-box"><img src="club388.png" class="club" alt="Club388"></div>
