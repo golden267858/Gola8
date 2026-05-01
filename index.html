@@ -1,125 +1,71 @@
 <!DOCTYPE html>
+
 <html lang="my">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Myanmar Gold 8 VIP - Club388 & Batman688 Agent</title>
-
-<meta name="description" content="Myanmar Gold 8 VIP Agent for Club388 and Batman688. KBZPay & WavePay deposit. 24/7 Customer Service.">
+<title>Gold 8 VIP Agent</title>
 
 <style>
 
 :root{
 --gold:#d4af37;
---gold-light:#f9edbe;
+--gold-light:#fff4c2;
 --gold-dark:#8a6d3b;
 --tg:#24A1DE;
 --viber:#7360f2;
 }
 
+*{
+box-sizing:border-box;
+}
+
 body{
-background:radial-gradient(circle at center,#1a1a1a 0%,#000 100%);
-color:#fff;
-font-family:Segoe UI,Roboto,Arial;
-display:flex;
-justify-content:center;
-align-items:center;
-min-height:100vh;
 margin:0;
+font-family:Segoe UI,Arial;
+background:radial-gradient(circle at center,#1a1a1a 0%,#000 100%);
+display:flex;
+align-items:center;
+justify-content:center;
+min-height:100vh;
+color:white;
 overflow:hidden;
 }
 
-/* COINS */
-
-.foreground-coins{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-pointer-events:none;
-z-index:999;
-}
-
-.coin{
-position:absolute;
-top:-60px;
-width:36px;
-height:36px;
-animation:fall linear forwards;
-}
-
-.coin-inner{
-width:100%;
-height:100%;
-animation:spin 4s linear infinite;
-}
-
-.face{
-width:100%;
-height:100%;
-border-radius:50%;
-background:radial-gradient(circle at 35% 35%,#fff9e6 0%,#d4af37 50%,#8a6d3b 100%);
-display:flex;
-align-items:center;
-justify-content:center;
-font-weight:900;
-font-size:11px;
-color:#5c441a;
-box-shadow:inset 0 0 6px rgba(0,0,0,.4);
-}
-
-.face::after{
-content:"MMK";
-}
-
-@keyframes spin{
-0%{transform:rotate(0deg)}
-100%{transform:rotate(360deg)}
-}
-
-@keyframes fall{
-0%{transform:translateY(0);opacity:0}
-10%{opacity:1}
-100%{transform:translateY(115vh)}
-}
-
-/* CARD */
+/* GOLD BORDER */
 
 .card{
-background:rgba(20,20,20,.95);
-width:88%;
-max-width:380px;
-padding:4px;
-border-radius:30px;
-text-align:center;
-backdrop-filter:blur(15px);
-border:1px solid rgba(212,175,55,.4);
+position:relative;
+width:360px;
+border-radius:28px;
+padding:3px;
+background:linear-gradient(45deg,#d4af37,#fff4c2,#d4af37);
+animation:borderRotate 6s linear infinite;
+}
+
+@keyframes borderRotate{
+0%{filter:hue-rotate(0deg)}
+100%{filter:hue-rotate(360deg)}
 }
 
 .card-inner{
-background:#121212;
-border-radius:26px;
-padding:25px 18px;
+background:#111;
+border-radius:25px;
+padding:25px;
+text-align:center;
 }
 
 /* LOGO */
 
-.logo-area{
-width:120px;
-height:120px;
-margin:auto;
-margin-bottom:10px;
-animation:breathe 3s ease-in-out infinite;
-}
-
 .logo{
-width:100%;
-height:100%;
+width:110px;
+height:110px;
+margin:auto;
 border-radius:20px;
 overflow:hidden;
 border:2px solid var(--gold);
+box-shadow:0 0 20px rgba(212,175,55,.6);
 }
 
 .logo img{
@@ -128,103 +74,65 @@ height:100%;
 object-fit:cover;
 }
 
-@keyframes breathe{
-0%,100%{transform:scale(1)}
-50%{transform:scale(1.05)}
-}
-
-.verified{
-background:#00c853;
-font-size:10px;
-padding:4px 8px;
-border-radius:10px;
-display:inline-block;
-margin-top:5px;
-}
-
-/* TEXT */
+/* TITLE */
 
 h1{
+margin:15px 0 8px;
 font-size:22px;
-color:var(--gold);
-margin:8px 0;
+color:var(--gold-light);
 }
 
 .status{
 font-size:12px;
-color:#44eb87;
-display:flex;
-align-items:center;
-justify-content:center;
-gap:6px;
-margin-bottom:18px;
-}
-
-.dot{
-width:8px;
-height:8px;
-background:#00c853;
-border-radius:50%;
-box-shadow:0 0 8px #00c853;
-animation:blink 1.2s infinite;
-}
-
-@keyframes blink{
-0%,100%{opacity:1}
-50%{opacity:.3}
-}
-
-/* GAME */
-
-.game-row{
-display:flex;
-justify-content:center;
-gap:15px;
+color:#5cff95;
 margin-bottom:20px;
 }
 
-.game-box{
-width:85px;
-height:85px;
-background:#000;
-border-radius:18px;
-border:1px solid rgba(212,175,55,.4);
+/* GAMES */
+
+.games{
 display:flex;
-align-items:center;
 justify-content:center;
-overflow:hidden;
+gap:14px;
+margin-bottom:18px;
 }
 
-.game-box img{
+.game{
+width:80px;
+height:80px;
+background:black;
+border-radius:16px;
+overflow:hidden;
+border:1px solid rgba(212,175,55,.4);
+}
+
+.game img{
 width:100%;
 height:100%;
 }
 
 /* PAY */
 
-.pay-row{
+.pay{
 display:flex;
-gap:12px;
+gap:10px;
 margin-bottom:20px;
 }
 
-.pay-box{
+.paybox{
 flex:1;
-background:rgba(255,255,255,.04);
-padding:12px;
-border-radius:18px;
+background:rgba(255,255,255,.05);
+border-radius:14px;
+padding:10px;
 }
 
-.pay-box img{
-width:50px;
-height:50px;
-object-fit:cover;
-margin-bottom:5px;
+.paybox img{
+width:45px;
 }
 
-/* BUTTONS */
+/* BUTTON */
 
-.btn-group{
+.buttons{
 display:flex;
 flex-direction:column;
 gap:12px;
@@ -234,114 +142,113 @@ gap:12px;
 display:flex;
 align-items:center;
 justify-content:center;
-gap:14px;
-padding:12px 20px;
+gap:10px;
+padding:12px;
 border-radius:20px;
 text-decoration:none;
-color:#fff;
+color:white;
 font-weight:bold;
 transition:.2s;
 }
 
 .btn img{
-width:34px;
+width:28px;
 }
 
 .btn:hover{
-transform:translateY(-2px);
-box-shadow:0 8px 25px rgba(0,0,0,.4);
+transform:scale(1.05);
 }
 
 .btn-tg{
 background:linear-gradient(90deg,#24A1DE,#1c82b6);
+box-shadow:0 0 15px rgba(36,161,222,.6);
 }
 
 .btn-viber{
 background:linear-gradient(90deg,#7360f2,#5d4ed1);
+box-shadow:0 0 15px rgba(115,96,242,.6);
 }
-
-/* NOTICE */
 
 .notice{
 margin-top:20px;
 font-size:11px;
-color:#888;
-line-height:1.5;
+color:#999;
 }
 
-.brand{
-color:var(--gold-light);
-font-weight:bold;
+/* COINS */
+
+.coin{
+position:fixed;
+top:-40px;
+font-size:22px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh);
+}
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div class="foreground-coins" id="coin-canvas"></div>
-
 <div class="card">
 <div class="card-inner">
 
-<div class="logo-area">
 <div class="logo">
 <img src="logo.png">
 </div>
-<div class="verified">Verified Agent</div>
-</div>
 
 <h1>Gold 8 VIP Service</h1>
+<div class="status">🟢 Online - အခုဆက်သွယ်နိုင်ပါသည်</div>
 
-<div class="status">
-<span class="dot"></span>
-<span>Online - အခုဆက်သွယ်နိုင်ပါသည်</span>
-</div>
+<div class="games">
 
-<div class="game-row">
-
-<div class="game-box">
+<div class="game">
 <img src="club388.png">
 </div>
 
-<div class="game-box">
+<div class="game">
 <img src="batman688.png">
 </div>
 
 </div>
 
-<div class="pay-row">
+<div class="pay">
 
-<div class="pay-box">
-<img src="kpay.png">
-<div>KBZPay</div>
+<div class="paybox">
+<img src="kpay.png"><br>
+KBZPay
 </div>
 
-<div class="pay-box">
-<img src="wavepay.png">
-<div>WavePay</div>
+<div class="paybox">
+<img src="wavepay.png"><br>
+WavePay
 </div>
 
 </div>
 
-<div class="btn-group">
+<div class="buttons">
 
 <a href="https://t.me/YOUR_TELEGRAM" class="btn btn-tg">
 <img src="telegram.png">
-<span>Telegram ဆက်သွယ်ရန်</span>
+Telegram Support
 </a>
 
 <a href="viber://chat?number=%2B959123456789" class="btn btn-viber">
 <img src="viber.png">
-<span>Viber ဆက်သွယ်ရန်</span>
+Viber Support
 </a>
 
 </div>
 
 <div class="notice">
-<span class="brand">Club388</span> & 
-<span class="brand">Batman688</span> Official Partner<br>
-Safe & Fast Service in Myanmar
+Club388 & Batman688 Official Agent<br>
+Safe Deposit • Fast Withdraw
 </div>
 
 </div>
@@ -349,46 +256,25 @@ Safe & Fast Service in Myanmar
 
 <script>
 
-function createCoins(){
-const container=document.getElementById("coin-canvas")
-const coinCount=8
+function spawnCoin(){
 
-for(let i=0;i<coinCount;i++){
-spawnCoin(container,Math.random()*5)
-}
-}
+let coin=document.createElement("div")
 
-function spawnCoin(container,delay){
-
-const coin=document.createElement("div")
 coin.className="coin"
+coin.innerHTML="💰"
 
-const left=Math.random()*100
-const duration=5+Math.random()*5
-const size=25+Math.random()*15
+coin.style.left=Math.random()*100+"%"
+coin.style.animationDuration=(4+Math.random()*4)+"s"
 
-coin.style.left=left+"%"
-coin.style.width=size+"px"
-coin.style.height=size+"px"
-coin.style.animationDelay=delay+"s"
-coin.style.animationDuration=duration+"s"
+document.body.appendChild(coin)
 
-coin.innerHTML=`
-<div class="coin-inner">
-<div class="face"></div>
-</div>
-`
-
-container.appendChild(coin)
-
-coin.addEventListener("animationend",()=>{
+setTimeout(()=>{
 coin.remove()
-spawnCoin(container,0)
-})
+},8000)
 
 }
 
-createCoins()
+setInterval(spawnCoin,500)
 
 </script>
 
