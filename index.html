@@ -12,13 +12,8 @@
 :root{
 --gold:#d4af37;
 --gold-light:#fff4c2;
---gold-dark:#8a6d3b;
 --tg:#24A1DE;
 --viber:#7360f2;
-}
-
-*{
-box-sizing:border-box;
 }
 
 body{
@@ -33,19 +28,18 @@ color:white;
 overflow:hidden;
 }
 
-/* GOLD BORDER */
+/* CARD */
 
 .card{
-position:relative;
 width:360px;
-border-radius:28px;
 padding:3px;
+border-radius:28px;
 background:linear-gradient(45deg,#d4af37,#fff4c2,#d4af37);
 animation:borderRotate 6s linear infinite;
 }
 
 @keyframes borderRotate{
-0%{filter:hue-rotate(0deg)}
+0%{filter:hue-rotate(0)}
 100%{filter:hue-rotate(360deg)}
 }
 
@@ -65,7 +59,7 @@ margin:auto;
 border-radius:20px;
 overflow:hidden;
 border:2px solid var(--gold);
-box-shadow:0 0 20px rgba(212,175,55,.6);
+box-shadow:0 0 20px rgba(212,175,55,.7);
 }
 
 .logo img{
@@ -88,7 +82,7 @@ color:#5cff95;
 margin-bottom:20px;
 }
 
-/* GAMES */
+/* GAME */
 
 .games{
 display:flex;
@@ -135,39 +129,62 @@ width:45px;
 .buttons{
 display:flex;
 flex-direction:column;
-gap:12px;
+gap:14px;
 }
 
 .btn{
 display:flex;
 align-items:center;
 justify-content:center;
-gap:10px;
-padding:12px;
-border-radius:20px;
+gap:16px;
+padding:16px;
+border-radius:24px;
 text-decoration:none;
 color:white;
 font-weight:bold;
+font-size:16px;
 transition:.2s;
 }
 
+/* BIG ICON */
+
 .btn img{
-width:28px;
+width:60px;
+height:60px;
+object-fit:contain;
+}
+
+/* TELEGRAM */
+
+.btn-tg{
+background:linear-gradient(90deg,#24A1DE,#1c82b6);
+box-shadow:0 0 18px rgba(36,161,222,.8);
+animation:glowTG 2s infinite alternate;
+}
+
+@keyframes glowTG{
+from{box-shadow:0 0 10px rgba(36,161,222,.5)}
+to{box-shadow:0 0 25px rgba(36,161,222,1)}
+}
+
+/* VIBER */
+
+.btn-viber{
+background:linear-gradient(90deg,#7360f2,#5d4ed1);
+box-shadow:0 0 18px rgba(115,96,242,.8);
+animation:glowVB 2s infinite alternate;
+}
+
+@keyframes glowVB{
+from{box-shadow:0 0 10px rgba(115,96,242,.5)}
+to{box-shadow:0 0 25px rgba(115,96,242,1)}
 }
 
 .btn:hover{
 transform:scale(1.05);
 }
 
-.btn-tg{
-background:linear-gradient(90deg,#24A1DE,#1c82b6);
-box-shadow:0 0 15px rgba(36,161,222,.6);
-}
-
-.btn-viber{
-background:linear-gradient(90deg,#7360f2,#5d4ed1);
-box-shadow:0 0 15px rgba(115,96,242,.6);
-}
+/* NOTICE */
 
 .notice{
 margin-top:20px;
@@ -234,12 +251,12 @@ WavePay
 
 <div class="buttons">
 
-<a href="https://t.me/YOUR_TELEGRAM" class="btn btn-tg">
+<a href="https://t.me/YOUR_TELEGRAM" class="btn btn-tg" onclick="vibrate()">
 <img src="telegram.png">
 Telegram Support
 </a>
 
-<a href="viber://chat?number=%2B959123456789" class="btn btn-viber">
+<a href="viber://chat?number=%2B959123456789" class="btn btn-viber" onclick="vibrate()">
 <img src="viber.png">
 Viber Support
 </a>
@@ -255,6 +272,8 @@ Safe Deposit • Fast Withdraw
 </div>
 
 <script>
+
+/* COINS */
 
 function spawnCoin(){
 
@@ -274,7 +293,15 @@ coin.remove()
 
 }
 
-setInterval(spawnCoin,500)
+setInterval(spawnCoin,300)
+
+/* PHONE VIBRATION */
+
+function vibrate(){
+if(navigator.vibrate){
+navigator.vibrate(120)
+}
+}
 
 </script>
 
