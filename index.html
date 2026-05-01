@@ -2,43 +2,58 @@
 <html lang="my">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Myanmar Gold 8 VIP</title>
+<title>Gold 8 VIP Service</title>
 
 <style>
 
 body{
 margin:0;
-background:radial-gradient(circle,#1a1a1a,#000);
 font-family:Arial;
-color:white;
+background:radial-gradient(circle at top,#1b1b1b,#000);
 display:flex;
 justify-content:center;
 align-items:center;
 min-height:100vh;
+color:white;
 overflow:hidden;
+}
+
+/* GOLD BACK LIGHT */
+body::before{
+content:"";
+position:fixed;
+width:600px;
+height:600px;
+background:radial-gradient(circle,rgba(212,175,55,0.15),transparent 70%);
+top:-200px;
+left:-200px;
+filter:blur(20px);
 }
 
 /* CARD */
-
 .card{
 width:88%;
 max-width:380px;
-background:#111;
-border-radius:30px;
+background:rgba(17,17,17,0.92);
+border-radius:28px;
 padding:25px;
 text-align:center;
-border:1px solid rgba(212,175,55,.4);
+border:1px solid rgba(212,175,55,0.35);
+box-shadow:0 0 30px rgba(0,0,0,0.6);
+backdrop-filter:blur(6px);
 }
 
+/* LOGO */
 .logo{
-width:110px;
-height:110px;
+width:115px;
+height:115px;
 margin:auto;
-border-radius:18px;
+border-radius:22px;
 overflow:hidden;
-border:2px solid gold;
+border:2px solid #d4af37;
+box-shadow:0 0 18px rgba(212,175,55,0.6);
 }
 
 .logo img{
@@ -47,32 +62,39 @@ height:100%;
 object-fit:cover;
 }
 
+/* TITLE */
 h1{
-color:#d4af37;
-margin:10px 0;
+color:#ffd97a;
+margin:12px 0 6px;
+letter-spacing:0.5px;
 }
 
 .status{
 font-size:12px;
-color:#44ff88;
+color:#4cff9a;
 margin-bottom:15px;
 }
 
 /* GAME */
-
 .games{
 display:flex;
 justify-content:center;
-gap:12px;
+gap:14px;
 margin-bottom:18px;
 }
 
 .game{
-width:80px;
-height:80px;
-border-radius:14px;
+width:82px;
+height:82px;
+border-radius:16px;
 overflow:hidden;
-border:1px solid rgba(212,175,55,.3);
+border:1px solid rgba(212,175,55,0.3);
+box-shadow:0 0 10px rgba(0,0,0,0.4);
+transition:.2s;
+}
+
+.game:hover{
+transform:scale(1.05);
 }
 
 .game img{
@@ -81,11 +103,10 @@ height:100%;
 }
 
 /* PAY */
-
 .pay{
 display:flex;
 justify-content:center;
-gap:15px;
+gap:18px;
 margin-bottom:20px;
 }
 
@@ -94,20 +115,21 @@ display:flex;
 flex-direction:column;
 align-items:center;
 font-size:12px;
-color:#ffd700;
+color:#ffd97a;
+font-weight:500;
 }
 
 .paybox img{
-width:55px;
-height:55px;
+width:58px;
+height:58px;
 background:#fff;
 padding:6px;
-border-radius:12px;
+border-radius:14px;
 object-fit:contain;
+box-shadow:0 0 8px rgba(0,0,0,0.3);
 }
 
 /* BUTTONS */
-
 .btn{
 display:flex;
 align-items:center;
@@ -115,34 +137,64 @@ justify-content:center;
 gap:12px;
 margin:10px auto;
 padding:14px;
-width:240px;
-border-radius:20px;
+width:250px;
+border-radius:22px;
 text-decoration:none;
 color:white;
 font-weight:bold;
+position:relative;
+overflow:hidden;
+transition:.2s;
 }
 
 .btn img{
-width:40px;
-height:40px;
+width:42px;
+height:42px;
 object-fit:contain;
 }
 
+/* TELEGRAM */
 .tg{
-background:#229ED9;
+background:linear-gradient(90deg,#229ED9,#1a7fb0);
+box-shadow:0 0 18px rgba(34,158,217,0.5);
 }
 
+/* VIBER */
 .vb{
-background:#665CAC;
+background:linear-gradient(90deg,#665CAC,#5246a3);
+box-shadow:0 0 18px rgba(102,92,172,0.5);
+}
+
+/* BUTTON HOVER */
+.btn:hover{
+transform:translateY(-2px);
+filter:brightness(1.1);
+}
+
+/* SHINE */
+.btn::before{
+content:"";
+position:absolute;
+top:0;
+left:-120%;
+width:120%;
+height:100%;
+background:linear-gradient(120deg,transparent,rgba(255,255,255,0.4),transparent);
+animation:shine 3s infinite;
+}
+
+@keyframes shine{
+0%{left:-120%}
+100%{left:120%}
 }
 
 /* COINS */
-
 .coin{
 position:fixed;
 top:-40px;
 font-size:20px;
 animation:fall linear forwards;
+opacity:0.9;
 }
 
 @keyframes fall{
@@ -164,9 +216,9 @@ transform:translateY(110vh);
 
 <h1>Gold 8 VIP Service</h1>
 
-<div class="status">🟢 Online</div>
+<div class="status">🟢 Online Service Available</div>
 
-<!-- GAMES -->
+<!-- GAME -->
 <div class="games">
 <div class="game"><img src="club388.png"></div>
 <div class="game"><img src="batman688.png"></div>
@@ -190,19 +242,19 @@ transform:translateY(110vh);
 <!-- BUTTONS -->
 <a class="btn tg" href="https://t.me/YOUR_TELEGRAM">
 <img src="telegram.png">
-Telegram
+Telegram Support
 </a>
 
 <a class="btn vb" href="viber://chat?number=%2B959123456789">
 <img src="viber.png">
-Viber
+Viber Support
 </a>
 
 </div>
 
 <script>
 
-/* simple coin */
+/* coins light version */
 setInterval(()=>{
 
 let c=document.createElement("div")
@@ -215,7 +267,7 @@ document.body.appendChild(c)
 
 setTimeout(()=>c.remove(),8000)
 
-},400)
+},350)
 
 </script>
 
