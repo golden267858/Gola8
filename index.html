@@ -3,28 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>VIP Casino</title>
+<title>VIP Casino Pro</title>
 
 <style>
 
 body{
 margin:0;
-font-family:Arial;
-background:#0b0b0b;
+background:#070707;
 color:white;
+font-family:Arial;
 text-align:center;
 overflow-x:hidden;
 }
 
 /* LOGO */
-
 .logo{
 width:120px;
 margin-top:20px;
+border-radius:20px;
 }
 
-/* 3D COIN */
+/* ===== 3D COIN ===== */
 
 .coin{
 width:90px;
@@ -32,39 +31,37 @@ height:90px;
 margin:20px auto;
 position:relative;
 transform-style:preserve-3d;
-animation:spin 4s linear infinite;
+animation:spin 3s linear infinite;
 }
 
-.coin div{
+.coin-face{
 position:absolute;
 width:100%;
 height:100%;
 border-radius:50%;
-background:linear-gradient(45deg,#ffd700,#ffb400);
+background:radial-gradient(circle,#ffe08a,#d4af37,#8a6d3b);
 display:flex;
 align-items:center;
 justify-content:center;
 font-weight:bold;
-font-size:26px;
 color:#000;
 }
 
-.coin .back{
-transform:rotateY(180deg);
-}
+.coin .front{transform:translateZ(6px)}
+.coin .back{transform:rotateY(180deg) translateZ(6px)}
 
 @keyframes spin{
 0%{transform:rotateY(0)}
 100%{transform:rotateY(360deg)}
 }
 
-/* SLOT MACHINE */
+/* SLOT */
 
 .slot{
-margin:20px auto;
 display:flex;
 justify-content:center;
 gap:10px;
+margin:20px;
 }
 
 .reel{
@@ -77,16 +74,9 @@ font-size:40px;
 display:flex;
 align-items:center;
 justify-content:center;
-animation:spinReel 1s infinite;
 }
 
-@keyframes spinReel{
-0%{transform:translateY(-10px)}
-50%{transform:translateY(10px)}
-100%{transform:translateY(-10px)}
-}
-
-/* BUTTONS */
+/* BUTTON */
 
 .btn{
 display:flex;
@@ -95,44 +85,30 @@ justify-content:center;
 gap:12px;
 margin:12px auto;
 padding:14px;
-width:240px;
+width:250px;
 border-radius:20px;
+color:white;
 font-weight:bold;
 text-decoration:none;
-color:white;
 position:relative;
 overflow:hidden;
 }
 
-.btn img{
-width:40px;
-}
+.btn img{width:40px}
 
-.telegram{
+.tg{
 background:#229ED9;
+animation:pulse 1.5s infinite;
 }
 
-.viber{
+.vb{
 background:#665CAC;
 }
 
-/* BUTTON SHINE */
-
-.btn:before{
-content:"";
-position:absolute;
-top:0;
-left:-100%;
-width:100%;
-height:100%;
-background:linear-gradient(120deg,transparent,rgba(255,255,255,0.6),transparent);
-animation:shine 3s infinite;
-}
-
-@keyframes shine{
-0%{left:-100%}
-50%{left:100%}
-100%{left:100%}
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.05)}
+100%{transform:scale(1)}
 }
 
 /* PAYMENT */
@@ -140,7 +116,7 @@ animation:shine 3s infinite;
 .pay{
 display:flex;
 justify-content:center;
-gap:30px;
+gap:25px;
 margin-top:20px;
 }
 
@@ -161,21 +137,7 @@ border-radius:14px;
 object-fit:contain;
 }
 
-/* COIN RAIN */
-
-.coinRain{
-position:fixed;
-top:-50px;
-font-size:24px;
-animation:fall linear infinite;
-}
-
-@keyframes fall{
-0%{transform:translateY(-50px)}
-100%{transform:translateY(110vh)}
-}
-
-/* WIN POPUP */
+/* POPUP */
 
 .popup{
 position:fixed;
@@ -183,10 +145,22 @@ bottom:20px;
 left:20px;
 background:#111;
 border:1px solid gold;
-padding:10px 16px;
+padding:10px 14px;
 border-radius:10px;
-font-size:14px;
 display:none;
+}
+
+/* COINS */
+
+.coinRain{
+position:fixed;
+top:-40px;
+font-size:22px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+100%{transform:translateY(110vh)}
 }
 
 </style>
@@ -196,35 +170,33 @@ display:none;
 
 <img src="logo.png" class="logo">
 
-<h2>VIP CASINO</h2>
+<h2>VIP CASINO PRO</h2>
 
+<!-- 3D COIN -->
 <div class="coin">
-<div>💰</div>
-<div class="back">💰</div>
+<div class="coin-face front">💰</div>
+<div class="coin-face back">💰</div>
 </div>
 
 <!-- SLOT -->
-
 <div class="slot">
-<div class="reel">7</div>
-<div class="reel">💎</div>
-<div class="reel">7</div>
+<div class="reel" id="r1">7</div>
+<div class="reel" id="r2">💎</div>
+<div class="reel" id="r3">7</div>
 </div>
 
 <!-- BUTTONS -->
-
-<a class="btn telegram" onclick="openTelegram()">
+<a class="btn tg" onclick="openTelegram()">
 <img src="telegram.png">
 Telegram Support
 </a>
 
-<a class="btn viber" href="#">
+<a class="btn vb">
 <img src="viber.png">
 Viber Support
 </a>
 
-<!-- PAYMENTS -->
-
+<!-- PAY -->
 <div class="pay">
 
 <div class="paybox">
@@ -239,63 +211,71 @@ WavePay
 
 </div>
 
-<div class="popup" id="winPopup"></div>
+<div class="popup" id="popup"></div>
 
 <script>
 
-/* TELEGRAM DETECT */
-
+/* TELEGRAM SMART OPEN */
 function openTelegram(){
 
 let tg="tg://resolve?domain=yourusername"
-
 let web="https://t.me/yourusername"
 
 window.location=tg
 
-setTimeout(function(){
+setTimeout(()=>{
 window.location=web
-},1500)
+},1200)
 
 }
 
-/* COIN RAIN */
+/* SLOT MACHINE LOGIC */
+let symbols=["7","💎","🔔","🍒","⭐"]
 
-for(let i=0;i<15;i++){
+function spin(){
 
-let coin=document.createElement("div")
-coin.className="coinRain"
-coin.innerHTML="🪙"
-coin.style.left=Math.random()*100+"%"
-coin.style.animationDuration=(3+Math.random()*4)+"s"
-
-document.body.appendChild(coin)
+document.getElementById("r1").innerText=symbols[Math.floor(Math.random()*symbols.length)]
+document.getElementById("r2").innerText=symbols[Math.floor(Math.random()*symbols.length)]
+document.getElementById("r3").innerText=symbols[Math.floor(Math.random()*symbols.length)]
 
 }
+
+setInterval(spin,100)
 
 /* WIN POPUP */
 
-let names=["Aung","Min","Ko","Su","Zaw","Moe","Htet"]
-let money=[50000,120000,80000,150000,90000]
+let names=["Aung","Min","Ko","Zaw","Htet","Moe"]
+let money=[50000,80000,120000,200000]
 
-function showWin(){
+function win(){
 
-let name=names[Math.floor(Math.random()*names.length)]
-let amount=money[Math.floor(Math.random()*money.length)]
+let n=names[Math.floor(Math.random()*names.length)]
+let m=money[Math.floor(Math.random()*money.length)]
 
-let popup=document.getElementById("winPopup")
+let p=document.getElementById("popup")
 
-popup.innerHTML=name+" won "+amount+" MMK 🎉"
+p.innerHTML="🎉 "+n+" won "+m+" MMK"
+p.style.display="block"
 
-popup.style.display="block"
-
-setTimeout(()=>{
-popup.style.display="none"
-},4000)
+setTimeout(()=>p.style.display="none",4000)
 
 }
 
-setInterval(showWin,5000)
+setInterval(win,5000)
+
+/* COINS */
+
+for(let i=0;i<20;i++){
+
+let c=document.createElement("div")
+c.className="coinRain"
+c.innerHTML="💰"
+c.style.left=Math.random()*100+"%"
+c.style.animationDuration=(3+Math.random()*5)+"s"
+
+document.body.appendChild(c)
+
+}
 
 </script>
 
