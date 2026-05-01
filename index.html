@@ -3,7 +3,7 @@
 <html lang="my">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 
 <title>Gold 8 VIP Agent</title>
 
@@ -11,7 +11,7 @@
 
 :root{
 --gold:#d4af37;
---gold-light:#fff2b0;
+--gold-light:#fff3c6;
 --tg:#24A1DE;
 --viber:#7360f2;
 }
@@ -19,11 +19,11 @@
 body{
 margin:0;
 font-family:Segoe UI,Arial;
-background:black;
-color:white;
+background:#000;
+color:#fff;
 display:flex;
-justify-content:center;
 align-items:center;
+justify-content:center;
 min-height:100vh;
 overflow:hidden;
 }
@@ -31,18 +31,15 @@ overflow:hidden;
 /* SLOT BACKGROUND */
 
 body::before{
-content:"777 888 999";
+content:"777 888 999 777 888 999";
 position:fixed;
 font-size:120px;
 color:rgba(255,215,0,0.05);
-top:0;
-left:0;
-width:200%;
-animation:slotmove 20s linear infinite;
 white-space:nowrap;
+animation:slot 20s linear infinite;
 }
 
-@keyframes slotmove{
+@keyframes slot{
 0%{transform:translateX(0)}
 100%{transform:translateX(-50%)}
 }
@@ -50,14 +47,14 @@ white-space:nowrap;
 /* CARD */
 
 .card{
-width:360px;
+width:370px;
 padding:3px;
 border-radius:30px;
 background:linear-gradient(45deg,#d4af37,#fff4c2,#d4af37);
-animation:borderGlow 6s linear infinite;
+animation:goldRotate 8s linear infinite;
 }
 
-@keyframes borderGlow{
+@keyframes goldRotate{
 0%{filter:hue-rotate(0)}
 100%{filter:hue-rotate(360deg)}
 }
@@ -75,10 +72,10 @@ text-align:center;
 width:110px;
 height:110px;
 margin:auto;
-border-radius:20px;
+border-radius:22px;
 overflow:hidden;
 border:2px solid var(--gold);
-box-shadow:0 0 20px rgba(212,175,55,.8);
+box-shadow:0 0 25px gold;
 }
 
 .logo img{
@@ -90,14 +87,22 @@ object-fit:cover;
 /* TITLE */
 
 h1{
-margin:15px 0 8px;
+margin:15px 0 5px;
 color:var(--gold-light);
 }
 
-.status{
+.online{
 font-size:12px;
-color:#5cff95;
-margin-bottom:18px;
+color:#59ff9f;
+margin-bottom:10px;
+}
+
+/* FAKE ONLINE */
+
+.counter{
+font-size:12px;
+color:#ccc;
+margin-bottom:15px;
 }
 
 /* GAME */
@@ -110,8 +115,8 @@ margin-bottom:18px;
 }
 
 .game{
-width:80px;
-height:80px;
+width:85px;
+height:85px;
 border-radius:16px;
 overflow:hidden;
 border:1px solid rgba(212,175,55,.4);
@@ -135,6 +140,8 @@ flex:1;
 background:rgba(255,255,255,.05);
 border-radius:14px;
 padding:10px;
+border:1px solid rgba(212,175,55,.3);
+box-shadow:0 0 10px rgba(212,175,55,.4);
 }
 
 .paybox img{
@@ -157,7 +164,7 @@ align-items:center;
 justify-content:center;
 gap:16px;
 padding:16px;
-border-radius:22px;
+border-radius:24px;
 text-decoration:none;
 color:white;
 font-weight:bold;
@@ -182,7 +189,35 @@ box-shadow:0 0 20px rgba(115,96,242,.9);
 }
 
 .btn:hover{
-transform:scale(1.05);
+transform:scale(1.06);
+}
+
+/* COINS */
+
+.coin{
+position:fixed;
+top:-40px;
+font-size:26px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{transform:translateY(110vh)}
+}
+
+/* FLOAT BUTTON */
+
+.float{
+position:fixed;
+bottom:25px;
+right:25px;
+background:gold;
+color:black;
+padding:12px 16px;
+border-radius:30px;
+font-weight:bold;
+box-shadow:0 0 20px gold;
+text-decoration:none;
 }
 
 /* NOTICE */
@@ -191,39 +226,6 @@ transform:scale(1.05);
 margin-top:18px;
 font-size:11px;
 color:#aaa;
-}
-
-/* COINS */
-
-.coin{
-position:fixed;
-top:-40px;
-font-size:24px;
-animation:fall linear forwards;
-}
-
-@keyframes fall{
-to{transform:translateY(110vh)}
-}
-
-/* POPUP */
-
-.popup{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#111;
-border:1px solid gold;
-padding:12px 16px;
-border-radius:14px;
-box-shadow:0 0 15px gold;
-display:none;
-}
-
-.popup a{
-color:gold;
-text-decoration:none;
-font-weight:bold;
 }
 
 </style>
@@ -241,7 +243,11 @@ font-weight:bold;
 
 <h1>Gold 8 VIP Service</h1>
 
-<div class="status">🟢 Online - အခုဆက်သွယ်နိုင်ပါသည်</div>
+<div class="online">🟢 Online Now</div>
+
+<div class="counter">
+Active Players: <span id="players">128</span>
+</div>
 
 <div class="games">
 
@@ -258,12 +264,12 @@ font-weight:bold;
 <div class="pay">
 
 <div class="paybox">
-<img src="Kpay.png" alt="KBZPay">
+<img src="Kpay.png">
 <div>KBZPay</div>
 </div>
 
 <div class="paybox">
-<img src="WavePay.png" alt="WavePay">
+<img src="WavePay.png">
 <div>WavePay</div>
 </div>
 
@@ -291,39 +297,50 @@ Fast Deposit • Fast Withdraw
 </div>
 </div>
 
-<div class="popup" id="popup">
-Need help? <a href="https://t.me/YOUR_TELEGRAM">Chat Support</a>
-</div>
+<a class="float" href="https://t.me/YOUR_TELEGRAM">
+💬 Chat
+</a>
 
 <script>
 
 /* COINS */
 
-function spawnCoin(){
+function coin(){
 
-let coin=document.createElement("div")
+let c=document.createElement("div")
 
-coin.className="coin"
-coin.innerHTML="💰"
+c.className="coin"
+c.innerHTML="💰"
 
-coin.style.left=Math.random()*100+"%"
-coin.style.animationDuration=(4+Math.random()*4)+"s"
+c.style.left=Math.random()*100+"%"
+c.style.animationDuration=(4+Math.random()*4)+"s"
 
-document.body.appendChild(coin)
+document.body.appendChild(c)
 
-setTimeout(()=>{coin.remove()},8000)
+setTimeout(()=>c.remove(),8000)
 
 }
 
-setInterval(spawnCoin,300)
+setInterval(coin,300)
 
-/* POPUP */
+/* FAKE PLAYERS */
 
-setTimeout(()=>{
-document.getElementById("popup").style.display="block"
-},3000)
+setInterval(()=>{
 
-/* AUTO TELEGRAM (mobile only) */
+let p=document.getElementById("players")
+
+let n=parseInt(p.innerText)
+
+n+=Math.floor(Math.random()*3)-1
+
+if(n<120)n=120
+if(n>200)n=200
+
+p.innerText=n
+
+},2000)
+
+/* AUTO TELEGRAM */
 
 setTimeout(()=>{
 
@@ -331,7 +348,7 @@ if(/Android|iPhone/i.test(navigator.userAgent)){
 window.location.href="https://t.me/YOUR_TELEGRAM"
 }
 
-},8000)
+},9000)
 
 </script>
 
