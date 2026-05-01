@@ -4,56 +4,66 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Gold 8 VIP Service</title>
+<title>Gold 8 VIP 3D Luxury</title>
 
 <style>
 
+/* ===== 3D SCENE ===== */
 body{
 margin:0;
 font-family:Arial;
-background:radial-gradient(circle at top,#1b1b1b,#000);
+background:radial-gradient(circle at center,#111,#000);
+overflow:hidden;
 display:flex;
 justify-content:center;
 align-items:center;
 min-height:100vh;
+perspective:1000px;
 color:white;
-overflow:hidden;
 }
 
-/* GOLD BACK LIGHT */
+/* GOLD LIGHT BACK */
 body::before{
 content:"";
 position:fixed;
-width:600px;
-height:600px;
-background:radial-gradient(circle,rgba(212,175,55,0.15),transparent 70%);
-top:-200px;
-left:-200px;
-filter:blur(20px);
+width:800px;
+height:800px;
+background:radial-gradient(circle,rgba(212,175,55,0.15),transparent 60%);
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+filter:blur(40px);
 }
 
-/* CARD */
+/* ===== CARD 3D ===== */
 .card{
-width:88%;
-max-width:380px;
-background:rgba(17,17,17,0.92);
+width:360px;
+background:rgba(20,20,20,0.85);
 border-radius:28px;
 padding:25px;
 text-align:center;
-border:1px solid rgba(212,175,55,0.35);
-box-shadow:0 0 30px rgba(0,0,0,0.6);
-backdrop-filter:blur(6px);
+border:1px solid rgba(212,175,55,0.4);
+transform-style:preserve-3d;
+transform:rotateX(6deg) rotateY(-6deg);
+box-shadow:0 30px 80px rgba(0,0,0,0.6);
+animation:float 6s ease-in-out infinite;
 }
 
-/* LOGO */
+@keyframes float{
+0%,100%{transform:rotateX(6deg) rotateY(-6deg) translateY(0)}
+50%{transform:rotateX(6deg) rotateY(-6deg) translateY(-10px)}
+}
+
+/* ===== LOGO ===== */
 .logo{
-width:115px;
-height:115px;
+width:110px;
+height:110px;
 margin:auto;
-border-radius:22px;
+border-radius:20px;
 overflow:hidden;
-border:2px solid #d4af37;
-box-shadow:0 0 18px rgba(212,175,55,0.6);
+border:2px solid gold;
+box-shadow:0 0 25px rgba(212,175,55,0.6);
+transform:translateZ(20px);
 }
 
 .logo img{
@@ -62,74 +72,50 @@ height:100%;
 object-fit:cover;
 }
 
-/* TITLE */
+/* ===== TITLE ===== */
 h1{
-color:#ffd97a;
-margin:12px 0 6px;
-letter-spacing:0.5px;
+color:#ffd700;
+margin:10px 0;
+transform:translateZ(15px);
 }
 
+/* ===== STATUS ===== */
 .status{
 font-size:12px;
 color:#4cff9a;
-margin-bottom:15px;
+transform:translateZ(10px);
 }
 
-/* GAME */
-.games{
+/* ===== SLOT 3D ===== */
+.slot{
 display:flex;
 justify-content:center;
-gap:14px;
-margin-bottom:18px;
+gap:10px;
+margin:20px 0;
+transform-style:preserve-3d;
+transform:translateZ(30px);
 }
 
-.game{
-width:82px;
-height:82px;
-border-radius:16px;
-overflow:hidden;
-border:1px solid rgba(212,175,55,0.3);
-box-shadow:0 0 10px rgba(0,0,0,0.4);
-transition:.2s;
-}
-
-.game:hover{
-transform:scale(1.05);
-}
-
-.game img{
-width:100%;
-height:100%;
-}
-
-/* PAY */
-.pay{
+.reel{
+width:70px;
+height:70px;
+background:linear-gradient(145deg,#111,#222);
+border:1px solid gold;
+border-radius:12px;
+font-size:32px;
 display:flex;
-justify-content:center;
-gap:18px;
-margin-bottom:20px;
-}
-
-.paybox{
-display:flex;
-flex-direction:column;
 align-items:center;
-font-size:12px;
-color:#ffd97a;
-font-weight:500;
+justify-content:center;
+box-shadow:0 10px 20px rgba(0,0,0,0.5);
+animation:spinReel 1s infinite linear;
 }
 
-.paybox img{
-width:58px;
-height:58px;
-background:#fff;
-padding:6px;
-border-radius:14px;
-object-fit:contain;
-box-shadow:0 0 8px rgba(0,0,0,0.3);
+@keyframes spinReel{
+0%{transform:rotateX(0deg)}
+100%{transform:rotateX(360deg)}
 }
 
-/* BUTTONS */
+/* ===== BUTTONS ===== */
 .btn{
 display:flex;
 align-items:center;
@@ -137,38 +123,36 @@ justify-content:center;
 gap:12px;
 margin:10px auto;
 padding:14px;
-width:250px;
-border-radius:22px;
-text-decoration:none;
+width:240px;
+border-radius:20px;
 color:white;
+text-decoration:none;
 font-weight:bold;
+transform:translateZ(20px);
+transition:.3s;
 position:relative;
 overflow:hidden;
-transition:.2s;
 }
 
 .btn img{
-width:42px;
-height:42px;
-object-fit:contain;
+width:40px;
 }
 
-/* TELEGRAM */
+/* TG */
 .tg{
-background:linear-gradient(90deg,#229ED9,#1a7fb0);
-box-shadow:0 0 18px rgba(34,158,217,0.5);
+background:linear-gradient(90deg,#229ED9,#1b7fb0);
+box-shadow:0 0 25px rgba(34,158,217,0.4);
 }
 
 /* VIBER */
 .vb{
-background:linear-gradient(90deg,#665CAC,#5246a3);
-box-shadow:0 0 18px rgba(102,92,172,0.5);
+background:linear-gradient(90deg,#665CAC,#4d44a3);
+box-shadow:0 0 25px rgba(102,92,172,0.4);
 }
 
-/* BUTTON HOVER */
+/* HOVER 3D */
 .btn:hover{
-transform:translateY(-2px);
-filter:brightness(1.1);
+transform:translateZ(40px) scale(1.05);
 }
 
 /* SHINE */
@@ -188,18 +172,46 @@ animation:shine 3s infinite;
 100%{left:120%}
 }
 
-/* COINS */
+/* ===== PAY ===== */
+.pay{
+display:flex;
+justify-content:center;
+gap:18px;
+margin-top:20px;
+transform:translateZ(15px);
+}
+
+.paybox{
+display:flex;
+flex-direction:column;
+align-items:center;
+font-size:12px;
+color:#ffd700;
+}
+
+.paybox img{
+width:58px;
+height:58px;
+background:#fff;
+padding:6px;
+border-radius:14px;
+object-fit:contain;
+box-shadow:0 10px 20px rgba(0,0,0,0.4);
+}
+
+/* ===== 3D COINS ===== */
 .coin{
 position:fixed;
-top:-40px;
-font-size:20px;
+top:-50px;
+font-size:22px;
 animation:fall linear forwards;
+transform-style:preserve-3d;
 opacity:0.9;
 }
 
 @keyframes fall{
 to{
-transform:translateY(110vh);
+transform:translateY(120vh) rotateY(720deg);
 }
 }
 
@@ -214,60 +226,61 @@ transform:translateY(110vh);
 <img src="logo.png">
 </div>
 
-<h1>Gold 8 VIP Service</h1>
+<h1>Gold 8 VIP 3D</h1>
 
-<div class="status">🟢 Online Service Available</div>
+<div class="status">🟢 Online Service</div>
 
-<!-- GAME -->
-<div class="games">
-<div class="game"><img src="club388.png"></div>
-<div class="game"><img src="batman688.png"></div>
+<!-- SLOT 3D -->
+<div class="slot">
+<div class="reel">7</div>
+<div class="reel">💎</div>
+<div class="reel">7</div>
 </div>
+
+<!-- BUTTONS -->
+<a class="btn tg" href="https://t.me/YOUR_TELEGRAM">
+<img src="telegram.png">
+Telegram
+</a>
+
+<a class="btn vb" href="viber://chat?number=%2B959123456789">
+<img src="viber.png">
+Viber
+</a>
 
 <!-- PAY -->
 <div class="pay">
 
 <div class="paybox">
 <img src="Kpay.png">
-<div>KBZPay</div>
+KBZPay
 </div>
 
 <div class="paybox">
 <img src="WavePay.png">
-<div>WavePay</div>
+WavePay
 </div>
 
 </div>
-
-<!-- BUTTONS -->
-<a class="btn tg" href="https://t.me/YOUR_TELEGRAM">
-<img src="telegram.png">
-Telegram Support
-</a>
-
-<a class="btn vb" href="viber://chat?number=%2B959123456789">
-<img src="viber.png">
-Viber Support
-</a>
 
 </div>
 
 <script>
 
-/* coins light version */
+/* 3D COIN RAIN */
 setInterval(()=>{
 
 let c=document.createElement("div")
 c.className="coin"
 c.innerHTML="💰"
 c.style.left=Math.random()*100+"%"
-c.style.animationDuration=(4+Math.random()*4)+"s"
+c.style.animationDuration=(3+Math.random()*4)+"s"
 
 document.body.appendChild(c)
 
 setTimeout(()=>c.remove(),8000)
 
-},350)
+},250)
 
 </script>
 
