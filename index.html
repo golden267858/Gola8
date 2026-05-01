@@ -3,7 +3,7 @@
 <html lang="my">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>Gold 8 VIP Agent</title>
 
@@ -11,7 +11,7 @@
 
 :root{
 --gold:#d4af37;
---gold-light:#fff4c2;
+--gold-light:#fff2b0;
 --tg:#24A1DE;
 --viber:#7360f2;
 }
@@ -19,13 +19,32 @@
 body{
 margin:0;
 font-family:Segoe UI,Arial;
-background:radial-gradient(circle at center,#1a1a1a 0%,#000 100%);
-display:flex;
-align-items:center;
-justify-content:center;
-min-height:100vh;
+background:black;
 color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
 overflow:hidden;
+}
+
+/* SLOT BACKGROUND */
+
+body::before{
+content:"777 888 999";
+position:fixed;
+font-size:120px;
+color:rgba(255,215,0,0.05);
+top:0;
+left:0;
+width:200%;
+animation:slotmove 20s linear infinite;
+white-space:nowrap;
+}
+
+@keyframes slotmove{
+0%{transform:translateX(0)}
+100%{transform:translateX(-50%)}
 }
 
 /* CARD */
@@ -33,19 +52,19 @@ overflow:hidden;
 .card{
 width:360px;
 padding:3px;
-border-radius:28px;
+border-radius:30px;
 background:linear-gradient(45deg,#d4af37,#fff4c2,#d4af37);
-animation:borderRotate 6s linear infinite;
+animation:borderGlow 6s linear infinite;
 }
 
-@keyframes borderRotate{
+@keyframes borderGlow{
 0%{filter:hue-rotate(0)}
 100%{filter:hue-rotate(360deg)}
 }
 
 .card-inner{
 background:#111;
-border-radius:25px;
+border-radius:26px;
 padding:25px;
 text-align:center;
 }
@@ -59,7 +78,7 @@ margin:auto;
 border-radius:20px;
 overflow:hidden;
 border:2px solid var(--gold);
-box-shadow:0 0 20px rgba(212,175,55,.7);
+box-shadow:0 0 20px rgba(212,175,55,.8);
 }
 
 .logo img{
@@ -72,29 +91,27 @@ object-fit:cover;
 
 h1{
 margin:15px 0 8px;
-font-size:22px;
 color:var(--gold-light);
 }
 
 .status{
 font-size:12px;
 color:#5cff95;
-margin-bottom:20px;
+margin-bottom:18px;
 }
 
 /* GAME */
 
 .games{
 display:flex;
+gap:12px;
 justify-content:center;
-gap:14px;
 margin-bottom:18px;
 }
 
 .game{
 width:80px;
 height:80px;
-background:black;
 border-radius:16px;
 overflow:hidden;
 border:1px solid rgba(212,175,55,.4);
@@ -121,10 +138,12 @@ padding:10px;
 }
 
 .paybox img{
-width:45px;
+width:50px;
+height:50px;
+object-fit:contain;
 }
 
-/* BUTTON */
+/* BUTTONS */
 
 .buttons{
 display:flex;
@@ -138,7 +157,7 @@ align-items:center;
 justify-content:center;
 gap:16px;
 padding:16px;
-border-radius:24px;
+border-radius:22px;
 text-decoration:none;
 color:white;
 font-weight:bold;
@@ -146,38 +165,20 @@ font-size:16px;
 transition:.2s;
 }
 
-/* BIG ICON */
-
 .btn img{
 width:60px;
 height:60px;
 object-fit:contain;
 }
 
-/* TELEGRAM */
-
 .btn-tg{
 background:linear-gradient(90deg,#24A1DE,#1c82b6);
-box-shadow:0 0 18px rgba(36,161,222,.8);
-animation:glowTG 2s infinite alternate;
+box-shadow:0 0 20px rgba(36,161,222,.9);
 }
-
-@keyframes glowTG{
-from{box-shadow:0 0 10px rgba(36,161,222,.5)}
-to{box-shadow:0 0 25px rgba(36,161,222,1)}
-}
-
-/* VIBER */
 
 .btn-viber{
 background:linear-gradient(90deg,#7360f2,#5d4ed1);
-box-shadow:0 0 18px rgba(115,96,242,.8);
-animation:glowVB 2s infinite alternate;
-}
-
-@keyframes glowVB{
-from{box-shadow:0 0 10px rgba(115,96,242,.5)}
-to{box-shadow:0 0 25px rgba(115,96,242,1)}
+box-shadow:0 0 20px rgba(115,96,242,.9);
 }
 
 .btn:hover{
@@ -187,9 +188,9 @@ transform:scale(1.05);
 /* NOTICE */
 
 .notice{
-margin-top:20px;
+margin-top:18px;
 font-size:11px;
-color:#999;
+color:#aaa;
 }
 
 /* COINS */
@@ -197,14 +198,32 @@ color:#999;
 .coin{
 position:fixed;
 top:-40px;
-font-size:22px;
+font-size:24px;
 animation:fall linear forwards;
 }
 
 @keyframes fall{
-to{
-transform:translateY(110vh);
+to{transform:translateY(110vh)}
 }
+
+/* POPUP */
+
+.popup{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#111;
+border:1px solid gold;
+padding:12px 16px;
+border-radius:14px;
+box-shadow:0 0 15px gold;
+display:none;
+}
+
+.popup a{
+color:gold;
+text-decoration:none;
+font-weight:bold;
 }
 
 </style>
@@ -221,6 +240,7 @@ transform:translateY(110vh);
 </div>
 
 <h1>Gold 8 VIP Service</h1>
+
 <div class="status">🟢 Online - အခုဆက်သွယ်နိုင်ပါသည်</div>
 
 <div class="games">
@@ -238,25 +258,25 @@ transform:translateY(110vh);
 <div class="pay">
 
 <div class="paybox">
-<img src="kpay.png"><br>
-KBZPay
+<img src="Kpay.png" alt="KBZPay">
+<div>KBZPay</div>
 </div>
 
 <div class="paybox">
-<img src="wavepay.png"><br>
-WavePay
+<img src="WavePay.png" alt="WavePay">
+<div>WavePay</div>
 </div>
 
 </div>
 
 <div class="buttons">
 
-<a href="https://t.me/YOUR_TELEGRAM" class="btn btn-tg" onclick="vibrate()">
+<a href="https://t.me/YOUR_TELEGRAM" class="btn btn-tg">
 <img src="telegram.png">
 Telegram Support
 </a>
 
-<a href="viber://chat?number=%2B959123456789" class="btn btn-viber" onclick="vibrate()">
+<a href="viber://chat?number=%2B959123456789" class="btn btn-viber">
 <img src="viber.png">
 Viber Support
 </a>
@@ -265,10 +285,14 @@ Viber Support
 
 <div class="notice">
 Club388 & Batman688 Official Agent<br>
-Safe Deposit • Fast Withdraw
+Fast Deposit • Fast Withdraw
 </div>
 
 </div>
+</div>
+
+<div class="popup" id="popup">
+Need help? <a href="https://t.me/YOUR_TELEGRAM">Chat Support</a>
 </div>
 
 <script>
@@ -287,21 +311,27 @@ coin.style.animationDuration=(4+Math.random()*4)+"s"
 
 document.body.appendChild(coin)
 
-setTimeout(()=>{
-coin.remove()
-},8000)
+setTimeout(()=>{coin.remove()},8000)
 
 }
 
 setInterval(spawnCoin,300)
 
-/* PHONE VIBRATION */
+/* POPUP */
 
-function vibrate(){
-if(navigator.vibrate){
-navigator.vibrate(120)
+setTimeout(()=>{
+document.getElementById("popup").style.display="block"
+},3000)
+
+/* AUTO TELEGRAM (mobile only) */
+
+setTimeout(()=>{
+
+if(/Android|iPhone/i.test(navigator.userAgent)){
+window.location.href="https://t.me/YOUR_TELEGRAM"
 }
-}
+
+},8000)
 
 </script>
 
