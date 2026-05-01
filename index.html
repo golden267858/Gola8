@@ -1,229 +1,396 @@
 <!DOCTYPE html>
 <html lang="my">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Myanmar Gold 8 VIP - Club388® & Batman688® Agent</title>
-    <style>
-        :root { 
-            --gold: #d4af37; 
-            --gold-light: #f9edbe; 
-            --gold-bright: #fff9e6;
-            --gold-dark: #8a6d3b;
-            --tg-blue: #24A1DE; 
-            --viber-purple: #7360f2;
-        }
-        
-        body { 
-            background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%); 
-            color: #fff; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            display: flex; justify-content: center; align-items: center; 
-            min-height: 100vh; margin: 0; overflow: hidden;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-        /* 3D 前景金币动画样式 */
-        .foreground-coins {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 999; perspective: 1000px;
-        }
-        .coin {
-            position: absolute; top: -60px; width: 36px; height: 36px;
-            transform-style: preserve-3d; animation: fall-slow linear forwards;
-        }
-        .coin-inner {
-            position: relative; width: 100%; height: 100%;
-            transform-style: preserve-3d; animation: rotate-flat 4s linear infinite;
-        }
-        .face {
-            position: absolute; width: 100%; height: 100%; border-radius: 50%;
-            background: radial-gradient(circle at 35% 35%, var(--gold-bright) 0%, var(--gold) 50%, var(--gold-dark) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: inset 0 0 6px rgba(0,0,0,0.4);
-            backface-visibility: hidden;
-        }
-        .face::after { content: "MMK"; font-size: 11px; font-weight: 900; color: #5c441a; }
-        .side { 
-            position: absolute; width: 100%; height: 100%; border-radius: 50%; 
-            background: repeating-conic-gradient(from 0deg, var(--gold-dark) 0deg 3deg, var(--gold-bright) 3deg 6deg);
-            transform: translateZ(-1px);
-        }
-        .front { transform: translateZ(1px); } 
-        .back  { transform: translateZ(-1px) rotateY(180deg); }
+<title>Myanmar Gold 8 VIP - Club388 & Batman688 Agent</title>
 
-        @keyframes rotate-flat { 0% { transform: rotateZ(0deg); } 100% { transform: rotateZ(360deg); } }
-        @keyframes fall-slow { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(115vh); opacity: 1; } }
+<meta name="description" content="Myanmar Gold 8 VIP Agent for Club388 and Batman688. KBZPay & WavePay deposit. 24/7 Customer Service.">
 
-        /* 卡片容器 */
-        .card { 
-            position: relative; background: rgba(20, 20, 20, 0.95); width: 88%; max-width: 380px; 
-            padding: 4px; border-radius: 35px; text-align: center; overflow: hidden;
-            backdrop-filter: blur(15px); border: 1px solid rgba(212, 175, 55, 0.3); z-index: 10;
-        }
-        .card::before {
-            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(transparent, transparent, transparent, var(--gold));
-            animation: rotate-border 4s linear infinite; z-index: -1;
-        }
-        @keyframes rotate-border { 100% { transform: rotate(360deg); } }
-        .card-inner { background: #121212; border-radius: 32px; padding: 25px 18px; }
+<style>
 
-        .logo-area { position: relative; width: 120px; height: 120px; margin: 0 auto 12px; animation: breathe 3s ease-in-out infinite; }
-        @keyframes breathe {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4)); }
-            50% { transform: scale(1.04); filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.7)); }
-        }
-        .logo { width: 100%; height: 100%; border-radius: 25px; overflow: hidden; border: 2.5px solid var(--gold); background: #1a1a1a; }
-        .logo img { width: 100%; height: 100%; object-fit: cover; }
-        .verified-badge { position: absolute; bottom: 0; right: 0; background: #00c853; color: white; font-size: 10px; padding: 3px 8px; border-radius: 10px; border: 2px solid #121212; }
+:root{
+--gold:#d4af37;
+--gold-light:#f9edbe;
+--gold-dark:#8a6d3b;
+--tg:#24A1DE;
+--viber:#7360f2;
+}
 
-        h1 { font-size: 22px; color: var(--gold); margin: 5px 0; font-weight: 800; }
-        
-        .status { 
-            font-size: 12px; color: #44eb87; 
-            display: flex; align-items: center; justify-content: center; 
-            gap: 6px; margin-bottom: 18px; line-height: 1;
-        }
-        .dot { 
-            width: 8px; height: 8px; background: #00c853; border-radius: 50%; 
-            box-shadow: 0 0 8px #00c853; animation: blink-dot 1.2s infinite ease-in-out; 
-        }
-        @keyframes blink-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.85); } }
+body{
+background:radial-gradient(circle at center,#1a1a1a 0%,#000 100%);
+color:#fff;
+font-family:Segoe UI,Roboto,Arial;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+margin:0;
+overflow:hidden;
+}
 
-        .game-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
-        .game-box { width: 85px; height: 85px; background: #000; border-radius: 20px; border: 1.5px solid rgba(212, 175, 55, 0.4); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-        .game-box img { width: 100%; height: 100%; }
+/* COINS */
 
-        .pay-row { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; }
-        .pay-box { flex: 1; display: flex; flex-direction: column; align-items: center; background: rgba(255,255,255,0.03); padding: 12px 5px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); }
-        .pay-icon-wrapper { width: 60px; height: 60px; border-radius: 14px; overflow: hidden; margin-bottom: 6px; background: #fff; }
-        .pay-icon-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+.foreground-coins{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+pointer-events:none;
+z-index:999;
+}
 
-        /* 按钮样式优化 */
-        .btn-group { display: flex; flex-direction: column; gap: 12px; }
-        .btn { 
-            display: flex; align-items: center; justify-content: center; /* 居中对齐 */
-            text-decoration: none; padding: 12px 20px; border-radius: 22px; 
-            color: white; transition: 0.2s; gap: 15px;
-        }
-        .btn-main { font-weight: bold; font-size: 16px; display: block; text-align: left; }
-        .btn-sub { font-size: 11px; opacity: 0.9; display: block; text-align: left; }
-        .btn-tg { background: linear-gradient(90deg, #24A1DE, #1c82b6); }
-        .btn-viber { background: linear-gradient(90deg, #7360f2, #5d4ed1); }
-        
-        /* 交互反馈 */
-        .btn:active { transform: scale(0.96); filter: brightness(0.9); }
+.coin{
+position:absolute;
+top:-60px;
+width:36px;
+height:36px;
+animation:fall linear forwards;
+}
 
-        .notice { margin-top: 20px; font-size: 11px; color: #777; line-height: 1.6; }
-        .brand-bold { color: var(--gold-light); font-weight: bold; }
-        sup { font-size: 7px; vertical-align: top; position: relative; top: -2px; left: 1px; }
-    </style>
+.coin-inner{
+width:100%;
+height:100%;
+animation:spin 4s linear infinite;
+}
+
+.face{
+width:100%;
+height:100%;
+border-radius:50%;
+background:radial-gradient(circle at 35% 35%,#fff9e6 0%,#d4af37 50%,#8a6d3b 100%);
+display:flex;
+align-items:center;
+justify-content:center;
+font-weight:900;
+font-size:11px;
+color:#5c441a;
+box-shadow:inset 0 0 6px rgba(0,0,0,.4);
+}
+
+.face::after{
+content:"MMK";
+}
+
+@keyframes spin{
+0%{transform:rotate(0deg)}
+100%{transform:rotate(360deg)}
+}
+
+@keyframes fall{
+0%{transform:translateY(0);opacity:0}
+10%{opacity:1}
+100%{transform:translateY(115vh)}
+}
+
+/* CARD */
+
+.card{
+background:rgba(20,20,20,.95);
+width:88%;
+max-width:380px;
+padding:4px;
+border-radius:30px;
+text-align:center;
+backdrop-filter:blur(15px);
+border:1px solid rgba(212,175,55,.4);
+}
+
+.card-inner{
+background:#121212;
+border-radius:26px;
+padding:25px 18px;
+}
+
+/* LOGO */
+
+.logo-area{
+width:120px;
+height:120px;
+margin:auto;
+margin-bottom:10px;
+animation:breathe 3s ease-in-out infinite;
+}
+
+.logo{
+width:100%;
+height:100%;
+border-radius:20px;
+overflow:hidden;
+border:2px solid var(--gold);
+}
+
+.logo img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+@keyframes breathe{
+0%,100%{transform:scale(1)}
+50%{transform:scale(1.05)}
+}
+
+.verified{
+background:#00c853;
+font-size:10px;
+padding:4px 8px;
+border-radius:10px;
+display:inline-block;
+margin-top:5px;
+}
+
+/* TEXT */
+
+h1{
+font-size:22px;
+color:var(--gold);
+margin:8px 0;
+}
+
+.status{
+font-size:12px;
+color:#44eb87;
+display:flex;
+align-items:center;
+justify-content:center;
+gap:6px;
+margin-bottom:18px;
+}
+
+.dot{
+width:8px;
+height:8px;
+background:#00c853;
+border-radius:50%;
+box-shadow:0 0 8px #00c853;
+animation:blink 1.2s infinite;
+}
+
+@keyframes blink{
+0%,100%{opacity:1}
+50%{opacity:.3}
+}
+
+/* GAME */
+
+.game-row{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-bottom:20px;
+}
+
+.game-box{
+width:85px;
+height:85px;
+background:#000;
+border-radius:18px;
+border:1px solid rgba(212,175,55,.4);
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+}
+
+.game-box img{
+width:100%;
+height:100%;
+}
+
+/* PAY */
+
+.pay-row{
+display:flex;
+gap:12px;
+margin-bottom:20px;
+}
+
+.pay-box{
+flex:1;
+background:rgba(255,255,255,.04);
+padding:12px;
+border-radius:18px;
+}
+
+.pay-box img{
+width:50px;
+height:50px;
+object-fit:cover;
+margin-bottom:5px;
+}
+
+/* BUTTONS */
+
+.btn-group{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.btn{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:14px;
+padding:12px 20px;
+border-radius:20px;
+text-decoration:none;
+color:#fff;
+font-weight:bold;
+transition:.2s;
+}
+
+.btn img{
+width:34px;
+}
+
+.btn:hover{
+transform:translateY(-2px);
+box-shadow:0 8px 25px rgba(0,0,0,.4);
+}
+
+.btn-tg{
+background:linear-gradient(90deg,#24A1DE,#1c82b6);
+}
+
+.btn-viber{
+background:linear-gradient(90deg,#7360f2,#5d4ed1);
+}
+
+/* NOTICE */
+
+.notice{
+margin-top:20px;
+font-size:11px;
+color:#888;
+line-height:1.5;
+}
+
+.brand{
+color:var(--gold-light);
+font-weight:bold;
+}
+
+</style>
 </head>
+
 <body>
-    <!-- 金币画布 -->
-    <div class="foreground-coins" id="coin-canvas"></div>
 
-    <div class="card">
-        <div class="card-inner">
-            <div class="logo-area">
-                <div class="logo"><img src="Gold-8-profile-logo-and-Banner.png" alt="Logo" onerror="this.style.background='#333'"></div>
-                <div class="verified-badge">Verified Agent</div>
-            </div>
-            <h1>Gold 8 VIP Service</h1>
-            
-            <div class="status">
-                <span class="dot"></span>
-                <span>Online - အခုဆက်သွယ်နိုင်ပါသည်</span>
-            </div>
+<div class="foreground-coins" id="coin-canvas"></div>
 
-            <div class="game-row">
-                <div class="game-box"><img src="club388.png" alt="Club388"></div>
-                <div class="game-box"><img src="batman688.png" alt="Batman688"></div>
-            </div>
+<div class="card">
+<div class="card-inner">
 
-            <div class="pay-row">
-                <div class="pay-box">
-                    <div class="pay-icon-wrapper"><img src="Kpay.png" alt="KPay"></div>
-                    <div class="pay-info"><strong>KBZPay</strong></div>
-                </div>
-                <div class="pay-box">
-                    <div class="pay-icon-wrapper"><img src="WavePay.png" alt="WavePay"></div>
-                    <div class="pay-info"><strong>WavePay</strong></div>
-                </div>
-            </div>
+<div class="logo-area">
+<div class="logo">
+<img src="logo.png">
+</div>
+<div class="verified">Verified Agent</div>
+</div>
 
-            <div class="btn-group">
-                <!-- Telegram 按钮：居中 + 去白边 -->
-                <a href="#" class="btn btn-tg" style="border: 2px solid rgba(255,255,255,0.4);">
-                    <img src="telegram.png" alt="Telegram" style="width: 60px; height: 60px; mix-blend-mode: screen; object-fit: contain;">
-                    <div>
-                        <span class="btn-main">Telegram ဆက်သွယ်ရန်</span>
-                        <span class="btn-sub">Customer Service 24/7</span>
-                    </div>
-                </a>
+<h1>Gold 8 VIP Service</h1>
 
-                <!-- Viber 按钮：居中 + 去白边 -->
-                <a href="#" class="btn btn-viber" style="border: 2px solid rgba(255,255,255,0.4);">
-                    <img src="viber.png" alt="Viber" style="width: 60px; height: 60px; mix-blend-mode: screen; object-fit: contain;">
-                    <div>
-                        <span class="btn-main">Viber ဆက်သွယ်ရန်</span>
-                        <span class="btn-sub">အခုပဲ တိုက်ရိုက်ပြောဆိုပါ</span>
-                    </div>
-                </a>
-            </div>
+<div class="status">
+<span class="dot"></span>
+<span>Online - အခုဆက်သွယ်နိုင်ပါသည်</span>
+</div>
 
-            <div class="notice">
-                <span class="brand-bold">Club388<sup>®</sup></span> & <span class="brand-bold">Batman688<sup>®</sup></span> Official Partner<br>
-                Safe & Fast Service in Myanmar
-            </div>
-        </div>
-    </div>
+<div class="game-row">
 
-    <script>
-        // 金币动画逻辑
-        function createCoins() {
-            const container = document.getElementById('coin-canvas');
-            if(!container) return;
-            const coinCount = 12; // 初始金币数量
-            
-            for (let i = 0; i < coinCount; i++) {
-                spawnCoin(container, Math.random() * 5);
-            }
-        }
+<div class="game-box">
+<img src="club388.png">
+</div>
 
-        function spawnCoin(container, delay = 0) {
-            const coin = document.createElement('div');
-            coin.className = 'coin';
-            
-            const left = Math.random() * 100;
-            const duration = 5 + Math.random() * 5;
-            const size = 25 + Math.random() * 15;
+<div class="game-box">
+<img src="batman688.png">
+</div>
 
-            coin.style.left = left + '%';
-            coin.style.width = size + 'px';
-            coin.style.height = size + 'px';
-            coin.style.animationDelay = delay + 's';
-            coin.style.animationDuration = duration + 's';
+</div>
 
-            coin.innerHTML = `
-                <div class="coin-inner">
-                    <div class="face front"></div>
-                    <div class="face back"></div>
-                    <div class="side"></div>
-                </div>
-            `;
-            
-            container.appendChild(coin);
+<div class="pay-row">
 
-            // 动画结束后移除并重新生成，保持循环
-            coin.addEventListener('animationend', () => {
-                coin.remove();
-                spawnCoin(container, 0);
-            });
-        }
+<div class="pay-box">
+<img src="kpay.png">
+<div>KBZPay</div>
+</div>
 
-        // 启动动画
-        createCoins();
-    </script>
+<div class="pay-box">
+<img src="wavepay.png">
+<div>WavePay</div>
+</div>
+
+</div>
+
+<div class="btn-group">
+
+<a href="https://t.me/YOUR_TELEGRAM" class="btn btn-tg">
+<img src="telegram.png">
+<span>Telegram ဆက်သွယ်ရန်</span>
+</a>
+
+<a href="viber://chat?number=%2B959123456789" class="btn btn-viber">
+<img src="viber.png">
+<span>Viber ဆက်သွယ်ရန်</span>
+</a>
+
+</div>
+
+<div class="notice">
+<span class="brand">Club388</span> & 
+<span class="brand">Batman688</span> Official Partner<br>
+Safe & Fast Service in Myanmar
+</div>
+
+</div>
+</div>
+
+<script>
+
+function createCoins(){
+const container=document.getElementById("coin-canvas")
+const coinCount=8
+
+for(let i=0;i<coinCount;i++){
+spawnCoin(container,Math.random()*5)
+}
+}
+
+function spawnCoin(container,delay){
+
+const coin=document.createElement("div")
+coin.className="coin"
+
+const left=Math.random()*100
+const duration=5+Math.random()*5
+const size=25+Math.random()*15
+
+coin.style.left=left+"%"
+coin.style.width=size+"px"
+coin.style.height=size+"px"
+coin.style.animationDelay=delay+"s"
+coin.style.animationDuration=duration+"s"
+
+coin.innerHTML=`
+<div class="coin-inner">
+<div class="face"></div>
+</div>
+`
+
+container.appendChild(coin)
+
+coin.addEventListener("animationend",()=>{
+coin.remove()
+spawnCoin(container,0)
+})
+
+}
+
+createCoins()
+
+</script>
+
 </body>
 </html>
