@@ -1,53 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="my">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-<title>VIP Service Landing</title>
-
-<!-- ===== PIXEL (replace ID) ===== -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-
-fbq('init','YOUR_PIXEL_ID');
-fbq('track','PageView');
-</script>
+<title>Myanmar Gold 8 VIP</title>
 
 <style>
 
 body{
 margin:0;
+background:radial-gradient(circle,#1a1a1a,#000);
 font-family:Arial;
-background:#0b0b0b;
-color:#fff;
+color:white;
 display:flex;
 justify-content:center;
 align-items:center;
 min-height:100vh;
-overflow-x:hidden;
+overflow:hidden;
 }
 
 /* CARD */
 
 .card{
-width:360px;
+width:88%;
+max-width:380px;
 background:#111;
-border-radius:26px;
+border-radius:30px;
 padding:25px;
 text-align:center;
-border:1px solid #d4af37;
-box-shadow:0 0 20px rgba(212,175,55,0.3);
+border:1px solid rgba(212,175,55,.4);
 }
-
-/* LOGO */
 
 .logo{
 width:110px;
@@ -64,27 +47,63 @@ height:100%;
 object-fit:cover;
 }
 
-/* TITLE */
-
 h1{
-color:#ffd700;
+color:#d4af37;
 margin:10px 0;
 }
 
-/* STATUS */
-
 .status{
 font-size:12px;
-color:#4cff9a;
-margin-bottom:10px;
+color:#44ff88;
+margin-bottom:15px;
 }
 
-/* TRUST */
+/* GAME */
 
-.trust{
+.games{
+display:flex;
+justify-content:center;
+gap:12px;
+margin-bottom:18px;
+}
+
+.game{
+width:80px;
+height:80px;
+border-radius:14px;
+overflow:hidden;
+border:1px solid rgba(212,175,55,.3);
+}
+
+.game img{
+width:100%;
+height:100%;
+}
+
+/* PAY */
+
+.pay{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-bottom:20px;
+}
+
+.paybox{
+display:flex;
+flex-direction:column;
+align-items:center;
 font-size:12px;
-color:#bbb;
-margin-bottom:12px;
+color:#ffd700;
+}
+
+.paybox img{
+width:55px;
+height:55px;
+background:#fff;
+padding:6px;
+border-radius:12px;
+object-fit:contain;
 }
 
 /* BUTTONS */
@@ -97,106 +116,39 @@ gap:12px;
 margin:10px auto;
 padding:14px;
 width:240px;
-border-radius:18px;
+border-radius:20px;
 text-decoration:none;
-font-weight:bold;
 color:white;
-transition:.2s;
-position:relative;
-overflow:hidden;
+font-weight:bold;
 }
 
 .btn img{
-width:38px;
-}
-
-/* CTA ANIMATION */
-
-.btn-tg{
-background:#229ED9;
-animation:pulse 1.6s infinite;
-}
-
-@keyframes pulse{
-0%{transform:scale(1)}
-50%{transform:scale(1.05)}
-100%{transform:scale(1)}
-}
-
-.btn-vb{
-background:#665CAC;
-}
-
-/* SHINE EFFECT */
-
-.btn:before{
-content:"";
-position:absolute;
-top:0;
-left:-100%;
-width:100%;
-height:100%;
-background:linear-gradient(120deg,transparent,rgba(255,255,255,.5),transparent);
-animation:shine 3s infinite;
-}
-
-@keyframes shine{
-0%{left:-100%}
-50%{left:100%}
-100%{left:100%}
-}
-
-/* PAYMENTS */
-
-.pay{
-display:flex;
-justify-content:center;
-gap:20px;
-margin-top:20px;
-}
-
-.paybox{
-text-align:center;
-font-size:12px;
-color:#ffd700;
-}
-
-.paybox img{
-width:55px;
-height:55px;
-background:#fff;
-padding:6px;
-border-radius:14px;
+width:40px;
+height:40px;
 object-fit:contain;
 }
 
-/* POPUP */
-
-.popup{
-position:fixed;
-bottom:20px;
-right:20px;
-background:#111;
-border:1px solid gold;
-padding:12px 14px;
-border-radius:12px;
-font-size:12px;
-display:none;
-z-index:999;
+.tg{
+background:#229ED9;
 }
 
-/* FLOAT CHAT BUTTON */
+.vb{
+background:#665CAC;
+}
 
-.float{
+/* COINS */
+
+.coin{
 position:fixed;
-bottom:20px;
-left:20px;
-background:gold;
-color:black;
-padding:12px 14px;
-border-radius:30px;
-font-weight:bold;
-text-decoration:none;
+top:-40px;
+font-size:20px;
+animation:fall linear forwards;
+}
+
+@keyframes fall{
+to{
+transform:translateY(110vh);
+}
 }
 
 </style>
@@ -210,30 +162,15 @@ text-decoration:none;
 <img src="logo.png">
 </div>
 
-<h1>VIP Service</h1>
+<h1>Gold 8 VIP Service</h1>
 
-<div class="status">
-🟢 Online Support Available
+<div class="status">🟢 Online</div>
+
+<!-- GAMES -->
+<div class="games">
+<div class="game"><img src="club388.png"></div>
+<div class="game"><img src="batman688.png"></div>
 </div>
-
-<div class="trust">
-✔ Fast Deposit | ✔ Secure Service | ✔ 24/7 Support
-</div>
-
-<!-- CTA BUTTON -->
-<a class="btn btn-tg"
-href="https://t.me/YOUR_TELEGRAM"
-onclick="track('telegram')">
-<img src="telegram.png">
-Telegram Contact
-</a>
-
-<a class="btn btn-vb"
-href="viber://chat?number=%2B959123456789"
-onclick="track('viber')">
-<img src="viber.png">
-Viber Contact
-</a>
 
 <!-- PAY -->
 <div class="pay">
@@ -250,44 +187,35 @@ Viber Contact
 
 </div>
 
-</div>
-
-<!-- FLOAT BUTTON -->
-<a class="float" href="https://t.me/YOUR_TELEGRAM">
-Chat Now
+<!-- BUTTONS -->
+<a class="btn tg" href="https://t.me/YOUR_TELEGRAM">
+<img src="telegram.png">
+Telegram
 </a>
 
-<!-- POPUP -->
-<div class="popup" id="popup">
-Need Help? Contact Support Now
+<a class="btn vb" href="viber://chat?number=%2B959123456789">
+<img src="viber.png">
+Viber
+</a>
+
 </div>
 
 <script>
 
-/* TRACKING */
-function track(type){
+/* simple coin */
+setInterval(()=>{
 
-if(window.fbq){
-fbq('trackCustom','Click',{
-button:type
-});
-}
+let c=document.createElement("div")
+c.className="coin"
+c.innerHTML="💰"
+c.style.left=Math.random()*100+"%"
+c.style.animationDuration=(4+Math.random()*4)+"s"
 
-}
+document.body.appendChild(c)
 
-/* POPUP */
-setTimeout(()=>{
-document.getElementById("popup").style.display="block";
-},4000);
+setTimeout(()=>c.remove(),8000)
 
-/* AUTO TELEGRAM (mobile) */
-setTimeout(()=>{
-
-if(/Android|iPhone/i.test(navigator.userAgent)){
-window.location.href="https://t.me/YOUR_TELEGRAM";
-}
-
-},12000);
+},400)
 
 </script>
 
