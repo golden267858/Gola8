@@ -68,6 +68,28 @@
         @keyframes rotate-border { 100% { transform: rotate(360deg); } }
         .card-inner { background: #121212; border-radius: 32px; padding: 25px 18px; }
 
+        /* 滚动条置顶样式 */
+        .winner-ticker {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 50px;
+            margin-bottom: 20px;
+            padding: 4px 10px;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .ticker-move {
+            display: inline-block;
+            animation: tickerScroll 40s linear infinite; /* 速度减慢 */
+            color: var(--gold-light);
+            font-size: 11px;
+            font-weight: bold;
+        }
+        @keyframes tickerScroll {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
         .logo-area { position: relative; width: 120px; height: 120px; margin: 0 auto 12px; animation: breathe 3s ease-in-out infinite; }
         @keyframes breathe {
             0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.4)); }
@@ -94,50 +116,28 @@
         .game-box { width: 85px; height: 85px; background: #000; border-radius: 20px; border: 1.5px solid rgba(212, 175, 55, 0.4); display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .game-box img { width: 100%; height: 100%; }
 
-        /* 新增：赢钱滚动条样式 */
-        .gola-ticker-wrap {
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid rgba(212, 175, 55, 0.5);
-            border-radius: 12px;
-            margin-bottom: 15px;
-            padding: 6px 0;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-        .gola-ticker-content {
-            display: inline-block;
-            animation: golaScroll 25s linear infinite;
-            color: #f9edbe;
-            font-size: 12.5px;
-            font-weight: bold;
-        }
-        @keyframes golaScroll {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-
         .pay-row { display: flex; justify-content: center; gap: 12px; margin-bottom: 20px; }
         .pay-box { flex: 1; display: flex; flex-direction: column; align-items: center; background: rgba(255,255,255,0.03); padding: 12px 5px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.08); }
         .pay-icon-wrapper { width: 60px; height: 60px; border-radius: 14px; overflow: hidden; margin-bottom: 6px; background: #fff; }
         .pay-icon-wrapper img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* 按钮样式优化：加入缩放和呼吸灯 */
+        /* 按钮组与按钮特效 */
         .btn-group { display: flex; flex-direction: column; gap: 12px; }
         .btn { 
-            display: flex; align-items: center; justify-content: center;
-            text-decoration: none; padding: 12px 20px; border-radius: 22px; 
+            display: flex; align-items: center; justify-content: center; 
+            text-decoration: none; padding: 10px 20px; border-radius: 22px; 
             color: white; transition: 0.2s; gap: 15px;
-            /* 核心：纵向缩小20% */
+            /* 纵向缩小20% */
             transform: scaleY(0.8);
         }
         
-        /* 核心：呼吸灯效果 */
+        /* 呼吸效果动画 */
         .btn-breathe {
-            animation: goldGlow 2.5s infinite ease-in-out;
+            animation: golaBreathe 2.5s infinite ease-in-out;
         }
-        @keyframes goldGlow {
+        @keyframes golaBreathe {
             0%, 100% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.2); filter: brightness(1); }
-            50% { box-shadow: 0 0 18px rgba(212, 175, 55, 0.7); filter: brightness(1.2); transform: scaleY(0.83) scaleX(1.02); }
+            50% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.6); filter: brightness(1.15); transform: scaleY(0.83) scaleX(1.02); }
         }
 
         .btn-main { font-weight: bold; font-size: 16px; display: block; text-align: left; }
@@ -145,7 +145,7 @@
         .btn-tg { background: linear-gradient(90deg, #24A1DE, #1c82b6); }
         .btn-viber { background: linear-gradient(90deg, #7360f2, #5d4ed1); }
         
-        .btn:active { transform: scaleY(0.78) scaleX(0.96); filter: brightness(0.9); }
+        .btn:active { transform: scaleY(0.75) scaleX(0.96); filter: brightness(0.9); }
 
         .notice { margin-top: 20px; font-size: 11px; color: #777; line-height: 1.6; }
         .brand-bold { color: var(--gold-light); font-weight: bold; }
@@ -157,6 +157,11 @@
 
     <div class="card">
         <div class="card-inner">
+            <!-- 1. 置顶滚动条 -->
+            <div class="winner-ticker">
+                <div class="ticker-move" id="winners-list">Loading...</div>
+            </div>
+
             <div class="logo-area">
                 <div class="logo"><img src="logo.png" alt="Logo" onerror="this.style.background='#333'"></div>
                 <div class="verified-badge">Verified Agent</div>
@@ -173,11 +178,6 @@
                 <div class="game-box"><img src="batman688.png" alt="Batman688"></div>
             </div>
 
-            <!-- 新增：赢钱滚动条（放在银行上方） -->
-            <div class="gola-ticker-wrap">
-                <div class="gola-ticker-content" id="winner-list">Loading...</div>
-            </div>
-
             <div class="pay-row">
                 <div class="pay-box">
                     <div class="pay-icon-wrapper"><img src="Kpay.png" alt="KPay"></div>
@@ -190,57 +190,75 @@
             </div>
 
             <div class="btn-group">
-                <!-- Telegram 按钮：已添加缩放和呼吸效果 -->
+                <!-- Telegram 按钮 -->
                 <a href="https://t.me" class="btn btn-tg btn-breathe" style="border: 2px solid rgba(255,255,255,0.4);">
-                    <img src="telegram.png" alt="TG" width="30">
+                    <img src="telegram.png" alt="Telegram" style="width: 60px; height: 60px; mix-blend-mode: screen; object-fit: contain;">
                     <div>
                         <span class="btn-main">Telegram ဆက်သွယ်ရန်</span>
-                        <span class="btn-sub">Click to chat with us</span>
+                        <span class="btn-sub">Customer Service 24/7</span>
                     </div>
                 </a>
-                
-                <!-- Viber 按钮：已添加缩放和呼吸效果 -->
+
+                <!-- Viber 按钮 -->
                 <a href="viber://pa?chatURI=gola8888" class="btn btn-viber btn-breathe" style="border: 2px solid rgba(255,255,255,0.4);">
-                    <img src="viber.png" alt="Viber" width="30">
+                    <img src="viber.png" alt="Viber" style="width: 60px; height: 60px; mix-blend-mode: screen; object-fit: contain;">
                     <div>
                         <span class="btn-main">Viber ဆက်သွယ်ရန်</span>
-                        <span class="btn-sub">Customer Service 24/7</span>
+                        <span class="btn-sub">အခုပဲ တိုက်ရိုက်ပြောဆိုပါ</span>
                     </div>
                 </a>
             </div>
 
             <div class="notice">
-                <p>Welcome to <span class="brand-bold">Gold 8 VIP</span>. Trusted service with 100% guarantee.</p>
+                <span class="brand-bold">Club388<sup>®</sup></span> & <span class="brand-bold">Batman688<sup>®</sup></span> Official Partner<br>
+                Safe & Fast Service in Myanmar
             </div>
         </div>
     </div>
 
     <script>
-        // 1. 金币下落逻辑 (保持原样)
-        const canvas = document.getElementById('coin-canvas');
-        function createCoin() {
-            const coin = document.createElement('div');
-            coin.className = 'coin';
-            coin.style.left = Math.random() * 100 + 'vw';
-            coin.style.animationDuration = (Math.random() * 3 + 4) + 's';
-            coin.innerHTML = '<div class="coin-inner"><div class="face front"></div><div class="face back"></div><div class="side"></div></div>';
-            canvas.appendChild(coin);
-            setTimeout(() => coin.remove(), 7000);
-        }
-        setInterval(createCoin, 400);
-
-        // 2. 随机赢钱名单生成逻辑
+        // 1. 初始化滚动条数据
         const mimes = ['097', '099', '094', '092', '098', '096'];
-        function initWinners() {
+        function initTicker() {
             let html = "";
             for(let i=0; i<15; i++) {
                 let phone = mimes[Math.floor(Math.random()*mimes.length)] + "****" + Math.floor(Math.random()*999);
-                let amount = (Math.floor(Math.random() * 45) + 5) * 10000;
-                html += ` 🎉 အသုံးပြုသူ [${phone}] မှ ${amount.toLocaleString()} MMK အနိုင်ရရှိသွားပါသည်။ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `;
+                let amount = (Math.floor(Math.random() * 40) + 10) * 10000;
+                html += ` 🎉 အသုံးပြုသူ [${phone}] သည် ${amount.toLocaleString()} MMK အနိုင်ရရှိသွားပါသည်။ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; `;
             }
-            document.getElementById('winner-list').innerHTML = html + html;
+            document.getElementById('winners-list').innerHTML = html + html;
         }
-        initWinners();
+        initTicker();
+
+        // 2. 金币动画逻辑 (保留原逻辑)
+        function createCoins() {
+            const container = document.getElementById('coin-canvas');
+            if(!container) return;
+            const coinCount = 12;
+            for (let i = 0; i < coinCount; i++) {
+                spawnCoin(container, Math.random() * 5);
+            }
+        }
+
+        function spawnCoin(container, delay = 0) {
+            const coin = document.createElement('div');
+            coin.className = 'coin';
+            const left = Math.random() * 100;
+            const duration = 5 + Math.random() * 5;
+            const size = 25 + Math.random() * 15;
+            coin.style.left = left + '%';
+            coin.style.width = size + 'px';
+            coin.style.height = size + 'px';
+            coin.style.animationDelay = delay + 's';
+            coin.style.animationDuration = duration + 's';
+            coin.innerHTML = `<div class="coin-inner"><div class="face front"></div><div class="face back"></div><div class="side"></div></div>`;
+            container.appendChild(coin);
+            coin.addEventListener('animationend', () => {
+                coin.remove();
+                spawnCoin(container, 0);
+            });
+        }
+        createCoins();
     </script>
 </body>
 </html>
