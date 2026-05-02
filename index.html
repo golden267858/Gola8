@@ -68,7 +68,7 @@
         @keyframes rotate-border { 100% { transform: rotate(360deg); } }
         .card-inner { background: #121212; border-radius: 32px; padding: 25px 18px; }
 
-        /* --- 无缝衔接跑马灯优化 --- */
+        /* 顶部无缝跑马灯 */
         .top-ticker {
             background: rgba(212, 175, 55, 0.08);
             border: 1px solid rgba(212, 175, 55, 0.25);
@@ -82,26 +82,23 @@
         .ticker-move {
             display: inline-block;
             white-space: nowrap;
-            animation: tickerInfinite 60s linear infinite; /* 速度大幅减慢至60s */
+            animation: tickerInfinite 65s linear infinite; 
             color: var(--gold-light);
             font-size: 11px;
             font-weight: bold;
             will-change: transform;
-            /* 增加文字闪烁效果 */
-            animation-composition: add;
         }
         .ticker-move span {
-            animation: textBlink 2.5s ease-in-out infinite;
+            animation: textBlink 3s ease-in-out infinite;
             display: inline-block;
         }
-
         @keyframes tickerInfinite {
             0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); } /* 滚动一半实现无缝对接 */
+            100% { transform: translateX(-50%); }
         }
         @keyframes textBlink {
             0%, 100% { opacity: 1; text-shadow: 0 0 2px rgba(212, 175, 55, 0); }
-            50% { opacity: 0.8; text-shadow: 0 0 8px rgba(212, 175, 55, 0.8); }
+            50% { opacity: 0.85; text-shadow: 0 0 10px rgba(212, 175, 55, 0.9); }
         }
 
         .logo-area { position: relative; width: 120px; height: 120px; margin: 0 auto 12px; animation: breathe 3s ease-in-out infinite; }
@@ -135,6 +132,7 @@
         .pay-icon-wrapper { width: 60px; height: 60px; border-radius: 14px; overflow: hidden; margin-bottom: 6px; background: #fff; }
         .pay-icon-wrapper img { width: 100%; height: 100%; object-fit: cover; }
 
+        /* 按钮最终优化 */
         .btn-group { display: flex; flex-direction: column; gap: 12px; }
         .btn { 
             display: flex; align-items: center; justify-content: center; 
@@ -143,12 +141,11 @@
             transform: scaleY(0.8);
             animation: golaBreathe 2.5s infinite ease-in-out;
         }
-        /* 内部内容反向缩放还原比例 */
-        .btn > * { transform: scaleY(1.25); }
+        .btn > * { transform: scaleY(1.25); } /* 还原内容比例 */
 
         @keyframes golaBreathe {
             0%, 100% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.2); filter: brightness(1); }
-            50% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.6); filter: brightness(1.15); transform: scaleY(0.83) scaleX(1.02); }
+            50% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.7); filter: brightness(1.2); transform: scaleY(0.83) scaleX(1.03); }
         }
 
         .btn-main { font-weight: bold; font-size: 16px; display: block; text-align: left; }
@@ -168,11 +165,8 @@
 
     <div class="card">
         <div class="card-inner">
-            <!-- 无缝跑马灯容器 -->
             <div class="top-ticker">
-                <div class="ticker-move" id="winners-list">
-                    <!-- 内容将由脚本填充 -->
-                </div>
+                <div class="ticker-move" id="winners-list"></div>
             </div>
 
             <div class="logo-area">
@@ -228,28 +222,41 @@
     </div>
 
     <script>
-        // --- 跑马灯逻辑：无缝衔接 ---
+        // --- 核心逻辑：奖金梯度分布 + 实时时间差 ---
         const mimes = ['097', '099', '094', '092', '098', '096'];
+        const timeTexts = ['ယခုလေးတင်', '1 မိနစ်ခန့်က', '3 မိနစ်ခန့်က', '5 မိနစ်ခန့်က']; // 刚刚, 1分钟前, 3分钟前, 5分钟前
+
         function initTicker() {
             let baseText = "";
-            for(let i=0; i<12; i++) {
+            for(let i=0; i<15; i++) {
                 let phone = mimes[Math.floor(Math.random()*mimes.length)] + "****" + Math.floor(Math.random()*999);
-                let amount = (Math.floor(Math.random() * 40) + 10) * 10000;
-                baseText += `<span> 🎉 အသုံးပြုသူ [${phone}] သည် ${amount.toLocaleString()} MMK အနိုင်ရရှိသွားပါသည်။ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>`;
+                let time = timeTexts[Math.floor(Math.random()*timeTexts.length)];
+                
+                let amount;
+                let jackpotStyle = "";
+                let seed = Math.random();
+                
+                if (seed > 0.93) { // 7% 巨奖
+                    amount = (Math.floor(Math.random() * 700) + 150) * 10000;
+                    jackpotStyle = " <b style='color:#fff; text-shadow:0 0 10px #ffd700;'>[JACKPOT!!]</b>";
+                } else if (seed > 0.75) { // 18% 大奖
+                    amount = (Math.floor(Math.random() * 100) + 50) * 10000;
+                } else { // 75% 普通奖
+                    amount = (Math.floor(Math.random() * 45) + 5) * 10000;
+                }
+
+                baseText += `<span> 💰${jackpotStyle} [${time}] အသုံးပြုသူ [${phone}] သည် ${amount.toLocaleString()} MMK အနိုင်ရရှိသွားပါသည်။ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>`;
             }
-            // 填充两遍实现无缝滚动
             document.getElementById('winners-list').innerHTML = baseText + baseText;
         }
         initTicker();
 
-        // 3D金币动画
+        // 3D 金币下落逻辑
         function createCoins() {
             const container = document.getElementById('coin-canvas');
-            if(!container) return;
             const coinCount = 12;
             for (let i = 0; i < coinCount; i++) { spawnCoin(container, Math.random() * 5); }
         }
-
         function spawnCoin(container, delay = 0) {
             const coin = document.createElement('div');
             coin.className = 'coin';
