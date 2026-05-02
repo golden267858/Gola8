@@ -21,7 +21,6 @@
             min-height: 100vh; margin: 0; overflow: hidden;
         }
 
-        /* 3D 前景金币动画样式 */
         .foreground-coins {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 999; perspective: 1000px;
@@ -54,7 +53,6 @@
         @keyframes rotate-flat { 0% { transform: rotateZ(0deg); } 100% { transform: rotateZ(360deg); } }
         @keyframes fall-slow { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(115vh); opacity: 1; } }
 
-        /* 卡片容器 */
         .card { 
             position: relative; background: rgba(20, 20, 20, 0.95); width: 88%; max-width: 380px; 
             padding: 4px; border-radius: 35px; text-align: center; overflow: hidden;
@@ -68,7 +66,6 @@
         @keyframes rotate-border { 100% { transform: rotate(360deg); } }
         .card-inner { background: #121212; border-radius: 32px; padding: 25px 18px; }
 
-        /* 顶部无缝跑马灯 */
         .top-ticker {
             background: rgba(212, 175, 55, 0.08);
             border: 1px solid rgba(212, 175, 55, 0.25);
@@ -82,7 +79,7 @@
         .ticker-move {
             display: inline-block;
             white-space: nowrap;
-            animation: tickerInfinite 65s linear infinite; 
+            animation: tickerInfinite 60s linear infinite; 
             color: var(--gold-light);
             font-size: 11px;
             font-weight: bold;
@@ -92,14 +89,8 @@
             animation: textBlink 3s ease-in-out infinite;
             display: inline-block;
         }
-        @keyframes tickerInfinite {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        @keyframes textBlink {
-            0%, 100% { opacity: 1; text-shadow: 0 0 2px rgba(212, 175, 55, 0); }
-            50% { opacity: 0.85; text-shadow: 0 0 10px rgba(212, 175, 55, 0.9); }
-        }
+        @keyframes tickerInfinite { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes textBlink { 0%, 100% { opacity: 1; text-shadow: 0 0 2px rgba(212, 175, 55, 0); } 50% { opacity: 0.85; text-shadow: 0 0 10px rgba(212, 175, 55, 0.9); } }
 
         .logo-area { position: relative; width: 120px; height: 120px; margin: 0 auto 12px; animation: breathe 3s ease-in-out infinite; }
         @keyframes breathe {
@@ -112,15 +103,8 @@
 
         h1 { font-size: 22px; color: var(--gold); margin: 5px 0; font-weight: 800; }
         
-        .status { 
-            font-size: 12px; color: #44eb87; 
-            display: flex; align-items: center; justify-content: center; 
-            gap: 6px; margin-bottom: 18px; line-height: 1;
-        }
-        .dot { 
-            width: 8px; height: 8px; background: #00c853; border-radius: 50%; 
-            box-shadow: 0 0 8px #00c853; animation: blink-dot 1.2s infinite ease-in-out; 
-        }
+        .status { font-size: 12px; color: #44eb87; display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 18px; line-height: 1; }
+        .dot { width: 8px; height: 8px; background: #00c853; border-radius: 50%; box-shadow: 0 0 8px #00c853; animation: blink-dot 1.2s infinite ease-in-out; }
         @keyframes blink-dot { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.85); } }
 
         .game-row { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; }
@@ -132,7 +116,6 @@
         .pay-icon-wrapper { width: 60px; height: 60px; border-radius: 14px; overflow: hidden; margin-bottom: 6px; background: #fff; }
         .pay-icon-wrapper img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* 按钮最终优化 */
         .btn-group { display: flex; flex-direction: column; gap: 12px; }
         .btn { 
             display: flex; align-items: center; justify-content: center; 
@@ -141,11 +124,11 @@
             transform: scaleY(0.8);
             animation: golaBreathe 2.5s infinite ease-in-out;
         }
-        .btn > * { transform: scaleY(1.25); } /* 还原内容比例 */
+        .btn > * { transform: scaleY(1.25); }
 
         @keyframes golaBreathe {
             0%, 100% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.2); filter: brightness(1); }
-            50% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.7); filter: brightness(1.2); transform: scaleY(0.83) scaleX(1.03); }
+            50% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.6); filter: brightness(1.15); transform: scaleY(0.83) scaleX(1.02); }
         }
 
         .btn-main { font-weight: bold; font-size: 16px; display: block; text-align: left; }
@@ -157,7 +140,6 @@
 
         .notice { margin-top: 20px; font-size: 11px; color: #777; line-height: 1.6; }
         .brand-bold { color: var(--gold-light); font-weight: bold; }
-        sup { font-size: 7px; vertical-align: top; position: relative; top: -2px; left: 1px; }
     </style>
 </head>
 <body>
@@ -197,7 +179,8 @@
             </div>
 
             <div class="btn-group">
-                <a href="https://t.me" class="btn btn-tg" style="border: 2px solid rgba(255,255,255,0.4);">
+                <!-- Telegram 按钮使用 Click/1 -->
+                <a href="https://6tjzk.bemobtrcks.com/click" class="btn btn-tg" style="border: 2px solid rgba(255,255,255,0.4);">
                     <img src="telegram.png" alt="Telegram" style="width: 60px; height: 60px; mix-blend-mode: screen; object-fit: contain;">
                     <div>
                         <span class="btn-main">Telegram ဆက်သွယ်ရန်</span>
@@ -205,7 +188,8 @@
                     </div>
                 </a>
 
-                <a href="viber://pa?chatURI=gola8888" class="btn btn-viber" style="border: 2px solid rgba(255,255,255,0.4);">
+                <!-- Viber 按钮使用 Click/2 -->
+                <a href="https://6tjzk.bemobtrcks.com/click/1" class="btn btn-viber" style="border: 2px solid rgba(255,255,255,0.4);">
                     <img src="viber.png" alt="Viber" style="width: 60px; height: 60px; mix-blend-mode: screen; object-fit: contain;">
                     <div>
                         <span class="btn-main">Viber ဆက်သွယ်ရန်</span>
@@ -222,41 +206,38 @@
     </div>
 
     <script>
-        // --- 核心逻辑：奖金梯度分布 + 实时时间差 ---
         const mimes = ['097', '099', '094', '092', '098', '096'];
-        const timeTexts = ['ယခုလေးတင်', '1 မိနစ်ခန့်က', '3 မိနစ်ခန့်က', '5 မိနစ်ခန့်က']; // 刚刚, 1分钟前, 3分钟前, 5分钟前
+        const timeTexts = ['ယခုလေးတင်', '1 မိနစ်ခန့်က', '3 မိနစ်ခန့်က', '5 မိနစ်ခန့်က'];
 
         function initTicker() {
             let baseText = "";
-            for(let i=0; i<15; i++) {
+            for(let i=0; i<12; i++) {
                 let phone = mimes[Math.floor(Math.random()*mimes.length)] + "****" + Math.floor(Math.random()*999);
                 let time = timeTexts[Math.floor(Math.random()*timeTexts.length)];
-                
                 let amount;
                 let jackpotStyle = "";
                 let seed = Math.random();
-                
-                if (seed > 0.93) { // 7% 巨奖
+                if (seed > 0.92) {
                     amount = (Math.floor(Math.random() * 700) + 150) * 10000;
                     jackpotStyle = " <b style='color:#fff; text-shadow:0 0 10px #ffd700;'>[JACKPOT!!]</b>";
-                } else if (seed > 0.75) { // 18% 大奖
+                } else if (seed > 0.75) {
                     amount = (Math.floor(Math.random() * 100) + 50) * 10000;
-                } else { // 75% 普通奖
+                } else {
                     amount = (Math.floor(Math.random() * 45) + 5) * 10000;
                 }
-
                 baseText += `<span> 💰${jackpotStyle} [${time}] အသုံးပြုသူ [${phone}] သည် ${amount.toLocaleString()} MMK အနိုင်ရရှိသွားပါသည်။ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>`;
             }
             document.getElementById('winners-list').innerHTML = baseText + baseText;
         }
         initTicker();
 
-        // 3D 金币下落逻辑
         function createCoins() {
             const container = document.getElementById('coin-canvas');
+            if(!container) return;
             const coinCount = 12;
             for (let i = 0; i < coinCount; i++) { spawnCoin(container, Math.random() * 5); }
         }
+
         function spawnCoin(container, delay = 0) {
             const coin = document.createElement('div');
             coin.className = 'coin';
