@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Myanmar Gold 8 VIP - Club388® & Batman688® Agent</title>
+    
+    <!-- 提前解析追踪域名的 DNS，让点击跳转做到 0 延迟 -->
+    <link rel="dns-prefetch" href="https://6tjzk.bemobtrcks.com">
+    <link rel="preconnect" href="https://6tjzk.bemobtrcks.com">
+
     <style>
         :root { 
             --gold: #d4af37; 
@@ -54,11 +59,12 @@
         @keyframes rotate-flat { 0% { transform: rotateZ(0deg); } 100% { transform: rotateZ(360deg); } }
         @keyframes fall-slow { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(115vh); opacity: 1; } }
 
-        /* 卡片容器 */
+        /* 卡片容器 - 性能优化版（移除毛玻璃，改用深色高不透明度和阴影） */
         .card { 
-            position: relative; background: rgba(20, 20, 20, 0.95); width: 88%; max-width: 380px; 
+            position: relative; background: rgba(18, 18, 18, 0.98); width: 88%; max-width: 380px; 
             padding: 4px; border-radius: 35px; text-align: center; overflow: hidden;
-            backdrop-filter: blur(15px); border: 1px solid rgba(212, 175, 55, 0.3); z-index: 10;
+            border: 1px solid rgba(212, 175, 55, 0.3); z-index: 10;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
         .card::before {
             content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
@@ -132,6 +138,27 @@
         .pay-icon-wrapper { width: 60px; height: 60px; border-radius: 14px; overflow: hidden; margin-bottom: 6px; background: #fff; }
         .pay-icon-wrapper img { width: 100%; height: 100%; object-fit: cover; }
 
+        /* 稀缺性逼单提示条样式 */
+        .urgency-alert {
+            background: rgba(255, 50, 50, 0.15);
+            border: 1px solid rgba(255, 50, 50, 0.4);
+            color: #ff4d4d;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 8px 10px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            animation: pulse-red 2s infinite;
+        }
+        @keyframes pulse-red {
+            0%, 100% { box-shadow: 0 0 5px rgba(255, 50, 50, 0.1); }
+            50% { box-shadow: 0 0 15px rgba(255, 50, 50, 0.4); }
+        }
+
         /* 按钮最终优化 */
         .btn-group { display: flex; flex-direction: column; gap: 12px; }
         .btn { 
@@ -141,7 +168,7 @@
             transform: scaleY(0.8);
             animation: golaBreathe 2.5s infinite ease-in-out;
         }
-        .btn > * { transform: scaleY(1.25); } /* 还原内容比例 */
+        .btn > * { transform: scaleY(1.25); } 
 
         @keyframes golaBreathe {
             0%, 100% { box-shadow: 0 0 5px rgba(212, 175, 55, 0.2); filter: brightness(1); }
@@ -196,8 +223,13 @@
                 </div>
             </div>
 
+            <!-- 稀缺性逼单提示 -->
+            <div class="urgency-alert">
+                <span>🔥</span> ယနေ့အတွက် VIP နေရာ (၅) နေရာသာ ကျန်ပါတော့သည်! <span>🔥</span>
+            </div>
+
             <div class="btn-group">
-                <!-- Telegram 按钮链接已替换为 BeMob 的 Offer 1 -->
+                <!-- Telegram 按钮链接 (BeMob Offer 1) -->
                 <a href="https://6tjzk.bemobtrcks.com/click/1" class="btn btn-tg" style="border: 2px solid rgba(255,255,255,0.4);">
                     <img src="telegram.png" alt="Telegram" style="width: 60px; height: 60px; mix-blend-mode: screen; object-fit: contain;">
                     <div>
@@ -206,7 +238,7 @@
                     </div>
                 </a>
 
-                <!-- Viber 按钮链接已替换为 BeMob 的 Offer 2 -->
+                <!-- Viber 按钮链接 (BeMob Offer 2) -->
                 <a href="https://6tjzk.bemobtrcks.com/click/2" class="btn btn-viber" style="border: 2px solid rgba(255,255,255,0.4);">
                     <img src="viber.png" alt="Viber" style="width: 60px; height: 60px; mix-blend-mode: screen; object-fit: contain;">
                     <div>
@@ -253,10 +285,11 @@
         }
         initTicker();
 
-        // 3D 金币下落逻辑
+        // 3D 金币下落逻辑 (减负优化版)
         function createCoins() {
             const container = document.getElementById('coin-canvas');
-            const coinCount = 12;
+            // 数量由 12 降低到 6，减轻手机端发热和卡顿，大幅提升兼容性
+            const coinCount = 6; 
             for (let i = 0; i < coinCount; i++) { spawnCoin(container, Math.random() * 5); }
         }
         function spawnCoin(container, delay = 0) {
