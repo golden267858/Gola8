@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>1 New Message - Bonus Alert!</title>
+    
+    <link rel="dns-prefetch" href="https://6tjzk.bemobtrcks.com">
+    <link rel="preconnect" href="https://6tjzk.bemobtrcks.com">
+
+    <style>
+        :root { 
+            --gold: #fbc02d; 
+            --red: #d32f2f;
+            --bg-dark: #0f0f13;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            background-color: #000;
+            color: #fff; 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex; justify-content: center; align-items: center; 
+            min-height: 100vh; overflow: hidden;
+        }
+
+        /* 核心卡片 - 全面屏圆角设计 */
+        .wrapper {
+            background: var(--bg-dark);
+            width: 100%;
+            max-width: 420px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 0 50px rgba(251, 192, 45, 0.1);
+        }
+
+        /* 顶部伪装通知栏 */
+        .alert-bar {
+            background: linear-gradient(90deg, var(--red), #f44336);
+            color: white;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 2px 10px rgba(211, 47, 47, 0.5);
+            animation: slideDown 0.5s ease-out;
+        }
+        .alert-bar span.icon { font-size: 18px; animation: ring 2s infinite; }
+        
+        @keyframes slideDown { 0% { transform: translateY(-100%); } 100% { transform: translateY(0); } }
+        @keyframes ring { 0%, 100% { transform: rotate(0); } 10%, 30%, 50% { transform: rotate(-15deg); } 20%, 40% { transform: rotate(15deg); } }
+
+        /* 倒计时区域 */
+        .timer-container {
+            text-align: center;
+            margin: 25px 0 15px;
+        }
+        .timer-title { color: #aaa; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .time-box {
+            background: #1c1c24;
+            border: 1.5px solid rgba(251, 192, 45, 0.3);
+            border-radius: 12px;
+            padding: 10px 15px;
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--gold);
+            min-width: 65px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .colon { font-size: 28px; font-weight: bold; color: var(--gold); align-self: center; animation: blink 1s infinite; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        /* 核心卖点区 */
+        .offer-box {
+            text-align: center;
+            padding: 20px;
+            flex-grow: 1;
+        }
+        .offer-box h1 { font-size: 26px; color: #fff; margin-bottom: 10px; line-height: 1.3; }
+        .offer-box h1 span { color: var(--gold); font-size: 32px; display: block; text-shadow: 0 0 15px rgba(251, 192, 45, 0.5); margin-top: 5px;}
+        .subtitle { font-size: 15px; color: #4caf50; font-weight: bold; margin-bottom: 20px; }
+        
+        /* 游戏与支付信誉证明 - 已改为上下两行排列 */
+        .trust-badges {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+        .trust-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 10px 20px;
+            width: 90%;
+        }
+        .badge-img { height: 35px; object-fit: contain; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5)); }
+
+        /* 行动按钮区 (并排) */
+        .action-area { padding: 0 20px 30px; }
+        .btn-group { display: flex; gap: 12px; justify-content: center; }
+        .btn { 
+            flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            text-decoration: none; padding: 15px 5px; border-radius: 20px; 
+            color: white; transition: 0.2s; position: relative; overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+        .btn-tg { background: linear-gradient(135deg, #1c82b6, #24A1DE); }
+        .btn-viber { background: linear-gradient(135deg, #5d4ed1, #7360f2); }
+        
+        .btn img { width: 45px; height: 45px; margin-bottom: 8px; object-fit: contain; z-index: 2;}
+        .btn span.main { font-weight: 800; font-size: 15px; z-index: 2; line-height: 1.2;}
+        .btn span.sub { font-size: 11px; opacity: 0.8; margin-top: 3px; z-index: 2;}
+        
+        /* 按钮扫光特效 */
+        .btn::after {
+            content: ""; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-20deg); animation: shine 3s infinite; z-index: 1;
+        }
+        @keyframes shine { 0% { left: -100%; } 20%, 100% { left: 200%; } }
+        .btn:active { transform: scale(0.96); }
+
+        .footer { text-align: center; font-size: 11px; color: #666; padding-bottom: 20px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <!-- 顶部通知栏 -->
+        <div class="alert-bar">
+            <span class="icon">🔔</span>
+            <span>စနစ်သတိပေးချက်: သင့်အတွက် ဘောနပ်စ်အသစ် ရောက်ရှိနေပါသည်!</span> <!-- 系统提示：您有一个新奖金！ -->
+        </div>
+
+        <!-- 倒计时 -->
+        <div class="timer-container">
+            <div class="timer-title">ဤအခွင့်အရေး ကုန်ဆုံးရန် ကျန်ရှိချိန်</div> <!-- 优惠结束倒计时 -->
+            <div class="countdown">
+                <div class="time-box" id="min">04</div>
+                <div class="colon">:</div>
+                <div class="time-box" id="sec">59</div>
+            </div>
+        </div>
+
+        <!-- 核心卖点 -->
+        <div class="offer-box">
+            <h1>ဂုဏ်ယူပါတယ်! သင်သည် ရွေးချယ်ခံရပါသည်<br> <!-- 恭喜！您被选中获得 -->
+                <span>100% NEW BONUS</span>
+            </h1>
+            <div class="subtitle">✅ VIP အကောင့် + အမြန်ငွေသွင်း/ငွေထုတ်</div> <!-- VIP账号 + 快速存取款 -->
+            
+            <!-- 游戏与支付信誉证明 (修改为上下两行) -->
+            <div class="trust-badges">
+                <!-- 第一行：游戏 -->
+                <div class="trust-row">
+                    <img src="club388.webp" alt="Club388" class="badge-img">
+                    <img src="batman688.webp" alt="Batman688" class="badge-img">
+                </div>
+                <!-- 第二行：支付 -->
+                <div class="trust-row">
+                    <img src="Kpay.webp" alt="KPay" class="badge-img" style="border-radius:6px;">
+                    <img src="WavePay.webp" alt="WavePay" class="badge-img" style="border-radius:6px;">
+                </div>
+            </div>
+        </div>
+
+        <!-- 按钮区 -->
+        <div class="action-area">
+            <div class="btn-group">
+                <!-- Telegram -->
+                <a href="https://6tjzk.bemobtrcks.com/click/1" class="btn btn-tg">
+                    <img src="telegram.webp" alt="Telegram">
+                    <span class="main">Telegram ဖြင့်<br>ရယူမည်</span>
+                    <span class="sub">24/7 Service</span>
+                </a>
+                <!-- Viber -->
+                <a href="https://6tjzk.bemobtrcks.com/click/2" class="btn btn-viber">
+                    <img src="viber.webp" alt="Viber">
+                    <span class="main">Viber ဖြင့်<br>ရယူမည်</span>
+                    <span class="sub">Fast Reply</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            Official Agent for Myanmar • 100% Secure & Trusted
+        </div>
+    </div>
+
+    <script>
+        // 5分钟倒计时脚本
+        let timeInSecs = 4 * 60 + 59;
+        let minElem = document.getElementById('min');
+        let secElem = document.getElementById('sec');
+        
+        let timer = setInterval(function() {
+            timeInSecs--;
+            let m = Math.floor(timeInSecs / 60);
+            let s = timeInSecs % 60;
+            
+            minElem.innerText = m < 10 ? '0' + m : m;
+            secElem.innerText = s < 10 ? '0' + s : s;
+            
+            if(timeInSecs <= 0) {
+                clearInterval(timer);
+                minElem.innerText = "00";
+                secElem.innerText = "00";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
